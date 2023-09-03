@@ -12,12 +12,6 @@ export const user: QueryResolvers['user'] = ({ id }) => {
   })
 }
 
-export const userAuth0: QueryResolvers['userAuth0'] = ({ auth0Sub }) => {
-  return db.user.findUnique({
-    where: { auth0Sub },
-  })
-}
-
 export const createUser: MutationResolvers['createUser'] = ({ input }) => {
   return db.user.create({
     data: input,

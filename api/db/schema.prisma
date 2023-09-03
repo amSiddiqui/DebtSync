@@ -11,8 +11,7 @@ generator client {
 // Define your own datamodels here and run `yarn redwood prisma migrate dev`
 
 model User {
-  id        Int      @id @default(autoincrement())
-  auth0Sub  String   @unique
+  id        String   @id
   email     String   @unique
   name      String?
   createdAt DateTime @default(now())
