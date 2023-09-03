@@ -65,7 +65,6 @@ const NewUserModal = () => {
       }}
       withCloseButton={false}
       opened={showModal}
-      size="lg"
       closeOnClickOutside={false}
       overlayProps={{
         color:

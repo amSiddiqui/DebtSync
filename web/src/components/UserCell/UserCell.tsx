@@ -1,3 +1,4 @@
+import { Loader, Modal, Stack, Text, useMantineTheme } from '@mantine/core'
 import type { FindUserQuery, FindUserQueryVariables } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -13,7 +14,37 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => {
+  const theme = useMantineTheme()
+  return (
+    <Modal
+      opened={true}
+      onClose={() => {}}
+      withCloseButton={false}
+      closeOnClickOutside={false}
+      closeOnEscape={false}
+      overlayProps={{
+        color:
+          theme.colorScheme === 'dark'
+            ? theme.colors.dark[9]
+            : theme.colors.gray[2],
+        opacity: 0.55,
+        blur: 3,
+      }}
+    >
+      <Stack
+        sx={{
+          height: '10rem',
+        }}
+        justify="center"
+        align="center"
+      >
+        <Text>Getting things ready</Text>
+        <Loader variant="dots" />
+      </Stack>
+    </Modal>
+  )
+}
 
 export const Empty = () => <NewUserModal />
 
