@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import { MantineProvider } from '@mantine/core'
 import * as theme from 'config/mantine.config'
 /** @type { import("@storybook/csf").GlobalTypes } */
