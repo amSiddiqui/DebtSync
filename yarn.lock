@@ -2637,6 +2637,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource/roboto@npm:^5.0.8":
+  version: 5.0.8
+  resolution: "@fontsource/roboto@npm:5.0.8"
+  checksum: da262037305145cc2a3b7f7c00066df72d4aa36d237001d7affce9390d16b3488eadaf0aa43a7ba86b3be8e310e3ae6823fa838365ee0e9a2e98a65e89e9d0f9
+  languageName: node
+  linkType: hard
+
 "@graphql-codegen/add@npm:4.0.1":
   version: 4.0.1
   resolution: "@graphql-codegen/add@npm:4.0.1"
@@ -20853,6 +20860,7 @@ __metadata:
   dependencies:
     "@auth0/auth0-spa-js": ^2
     "@emotion/react": ^11.11.1
+    "@fontsource/roboto": ^5.0.8
     "@mantine/core": ^6.0.19
     "@mantine/hooks": ^6.0.19
     "@redwoodjs/auth-auth0-web": 6.1.1

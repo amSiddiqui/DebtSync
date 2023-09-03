@@ -1,11 +1,16 @@
+import { Button } from '@mantine/core'
+
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
 
 const HomePage = () => {
-  const { isAuthenticated, currentUser } = useAuth()
+  const { isAuthenticated, currentUser, loading, logIn } = useAuth()
 
+  if (loading) {
+    return <div>Loading...</div>
+  }
   return (
     <>
       <MetaTags title="Home" description="Home page" />
@@ -19,6 +24,7 @@ const HomePage = () => {
         <Link to={routes.home()}>Home</Link>`
         <p>{JSON.stringify({ isAuthenticated })}</p>
         <p>{JSON.stringify({ currentUser })}</p>
+        <Button onClick={() => logIn()}>Log In</Button>
       </p>
     </>
   )

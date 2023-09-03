@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^2",
+    "@fontsource/roboto": "^5.0.8",
     "@redwoodjs/auth-auth0-web": "6.1.1",
     "@redwoodjs/forms": "6.1.1",
     "@redwoodjs/router": "6.1.1",
