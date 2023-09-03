@@ -10,4 +10,8 @@ export default meta
 
 type Story = StoryObj<typeof MainLayout>
 
-export const Primary: Story = {}
+export const Primary: Story = {
+  args: {
+    children: 'Body',
+  },
+}
