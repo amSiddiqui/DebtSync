@@ -2,17 +2,20 @@ import type { FindUserQuery, FindUserQueryVariables } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
+import NewUserModal from '../NewUserModal/NewUserModal'
+
 export const QUERY = gql`
   query FindUserQuery($id: String!) {
     user: user(id: $id) {
       id
+      name
     }
   }
 `
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => <NewUserModal />
 
 export const Failure = ({
   error,
@@ -23,5 +26,5 @@ export const Failure = ({
 export const Success = ({
   user,
 }: CellSuccessProps<FindUserQuery, FindUserQueryVariables>) => {
-  return <div>{JSON.stringify(user)}</div>
+  return <div>{user.name}</div>
 }
