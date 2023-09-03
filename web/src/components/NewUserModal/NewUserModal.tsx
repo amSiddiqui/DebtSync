@@ -38,7 +38,9 @@ const NewUserModal = () => {
     CreateUserMutation,
     CreateUserMutationVariables
   >(CREATE_USER, {
-    onCompleted: () => {},
+    onCompleted: () => {
+      setShowModal(false)
+    },
     refetchQueries: [
       { query: UserQuery, variables: { id: userMetadata?.sub } },
     ],
