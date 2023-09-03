@@ -15,7 +15,7 @@ import {
 import { Sun, MoonStars } from 'tabler-icons-react'
 
 import { useAuth } from 'src/auth'
-import UserCell from 'src/components/UserCell'
+import { NavbarUser } from 'src/components/NavbarUser/NavbarUser'
 
 type MainLayoutProps = {
   children?: React.ReactNode
@@ -52,7 +52,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           </Navbar.Section>
           <Navbar.Section>
             {isAuthenticated && currentUser && (
-              <UserCell id={currentUser.sub as string} />
+              <NavbarUser id={currentUser.sub as string} />
             )}
           </Navbar.Section>
         </Navbar>

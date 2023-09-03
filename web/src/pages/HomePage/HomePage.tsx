@@ -1,3 +1,5 @@
+import { Text } from '@mantine/core'
+
 import { MetaTags } from '@redwoodjs/web'
 
 const HomePage = () => {
@@ -9,6 +11,14 @@ const HomePage = () => {
       <p>
         Find me in <code>./web/src/pages/HomePage/HomePage.tsx</code>
       </p>
+      <Text lineClamp={10}>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam eius
+        debitis illo asperiores ut iusto quae commodi est. Dolores, dolore
+        perferendis! Ullam rem, nulla numquam velit nobis repellat, quasi odit
+        accusamus architecto doloribus eaque neque est qui pariatur perspiciatis
+        beatae inventore ipsum dolores sunt autem laudantium! Temporibus, illum
+        nesciunt! Explicabo.
+      </Text>
     </>
   )
 }

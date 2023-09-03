@@ -1,7 +1,21 @@
-import { Loader, Modal, Stack, Text, useMantineTheme } from '@mantine/core'
+import {
+  Avatar,
+  Box,
+  Group,
+  Loader,
+  Modal,
+  Stack,
+  Text,
+  rem,
+  useMantineTheme,
+} from '@mantine/core'
+import _ from 'lodash'
+import { ChevronRight } from 'tabler-icons-react'
 import type { FindUserQuery, FindUserQueryVariables } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+
+import { useAuth } from 'src/auth'
 
 import NewUserModal from '../NewUserModal/NewUserModal'
 
@@ -57,5 +71,21 @@ export const Failure = ({
 export const Success = ({
   user,
 }: CellSuccessProps<FindUserQuery, FindUserQueryVariables>) => {
-  return <div>{user.name}</div>
+  const { userMetadata } = useAuth()
+  const email = userMetadata ? userMetadata.email : ''
+
+  return (
+    <Group>
+      <Avatar radius="xl">{user.name[0]}</Avatar>
+      <Box sx={{ flex: 1 }}>
+        <Text size="sm" weight={500}>
+          {user.name}
+        </Text>
+        <Text color="dimmed" size="xs">
+          {_.truncate(email, { length: 25 })}
+        </Text>
+      </Box>
+      <ChevronRight size={rem(18)} />
+    </Group>
+  )
 }

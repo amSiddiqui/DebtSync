@@ -9343,6 +9343,7 @@ __metadata:
     "@redwoodjs/api": 6.1.1
     "@redwoodjs/auth-auth0-api": 6.1.1
     "@redwoodjs/graphql-server": 6.1.1
+    lodash: ^4.17.21
   languageName: unknown
   linkType: soft
 
@@ -24449,6 +24450,7 @@ __metadata:
     "@redwoodjs/router": 6.1.1
     "@redwoodjs/vite": 6.1.1
     "@redwoodjs/web": 6.1.1
+    lodash: ^4.17.21
     prop-types: 15.8.1
     react: 18.2.0
     react-dom: 18.2.0

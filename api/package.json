@@ -5,6 +5,7 @@
   "dependencies": {
     "@redwoodjs/api": "6.1.1",
     "@redwoodjs/auth-auth0-api": "6.1.1",
-    "@redwoodjs/graphql-server": "6.1.1"
+    "@redwoodjs/graphql-server": "6.1.1",
+    "lodash": "^4.17.21"
   }
 }
