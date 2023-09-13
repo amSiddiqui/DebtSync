@@ -22,7 +22,7 @@ type MainLayoutProps = {
 }
 
 const MainLayout = ({ children }: MainLayoutProps) => {
-  const { isAuthenticated, currentUser } = useAuth()
+  const { isAuthenticated, currentUser, logOut } = useAuth()
   const [opened, setOpened] = React.useState(false)
   const theme = useMantineTheme()
   const { toggleColorScheme } = useMantineColorScheme()
@@ -52,13 +52,16 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           </Navbar.Section>
           <Navbar.Section>
             {isAuthenticated && currentUser && (
-              <NavbarUser id={currentUser.sub as string} />
+              <NavbarUser logOutCallback={() => {
+                logOut()
+                setOpened(false)
+              }} id={currentUser.sub as string} />
             )}
           </Navbar.Section>
         </Navbar>
       }
       header={
-        <Header height={{ base: 50, md: 70 }} p="md">
+        <Header height={70} p="md">
           <Group sx={{ height: '100%' }} px={20} position="apart">
             <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
               <Burger
