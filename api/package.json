@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@redwoodjs/api": "6.1.1",
-    "@redwoodjs/auth-auth0-api": "6.1.1",
-    "@redwoodjs/graphql-server": "6.1.1",
+    "@redwoodjs/api": "6.2.1",
+    "@redwoodjs/auth-auth0-api": "6.2.1",
+    "@redwoodjs/graphql-server": "6.2.1",
     "lodash": "^4.17.21"
   }
 }
