@@ -12,10 +12,12 @@ import {
   ActionIcon,
   useMantineColorScheme,
 } from '@mantine/core'
-import { Sun, MoonStars } from 'tabler-icons-react'
+import { Sun, MoonStars, Home } from 'tabler-icons-react'
 
 import { useAuth } from 'src/auth'
 import { NavbarUser } from 'src/components/NavbarUser/NavbarUser'
+import NavbarLink from 'src/components/NavbarLink/NavbarLink'
+import { routes } from '@redwoodjs/router'
 
 type MainLayoutProps = {
   children?: React.ReactNode
@@ -48,7 +50,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           hiddenBreakpoint="sm"
         >
           <Navbar.Section grow mt="xs">
-            <Text>Application</Text>
+            <NavbarLink color="blue" icon={<Home size="1rem" />} label="Home" to={routes.home()} />
           </Navbar.Section>
           <Navbar.Section>
             {isAuthenticated && currentUser && (
