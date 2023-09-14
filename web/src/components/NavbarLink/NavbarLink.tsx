@@ -1,6 +1,6 @@
 import { Group, ThemeIcon, UnstyledButton, Text } from '@mantine/core'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link } from '@redwoodjs/router'
 
 interface Props {
   color: string

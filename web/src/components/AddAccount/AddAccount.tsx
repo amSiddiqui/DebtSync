@@ -11,6 +11,7 @@ import { useMutation } from '@redwoodjs/web'
 import { Toaster, toast } from '@redwoodjs/web/dist/toast'
 
 import { useAuth } from 'src/auth'
+import { QUERY as AccountsQuery } from 'src/components/AccountsCell/AccountsCell'
 
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation CreateAccountMutation($input: CreateAccountInput!) {
@@ -37,6 +38,7 @@ const AddAccount = () => {
       toast.success('Account Created')
       close()
     },
+    refetchQueries: [{ query: AccountsQuery }],
   })
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
