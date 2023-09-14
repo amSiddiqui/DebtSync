@@ -21,16 +21,17 @@ model User {
 }
 
 model Account {
-  id            Int           @id @default(autoincrement())
-  status        String
-  name          String
-  user          User          @relation("PrimaryUser", fields: [userId], references: [id])
-  linkedUser    User?         @relation("LinkedUser", fields: [linkedUserId], references: [id])
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  userId        String
-  linkedUserId  String?
-  Transaction   Transaction[]
+  id           Int           @id @default(autoincrement())
+  status       String
+  name         String
+  user         User          @relation("PrimaryUser", fields: [userId], references: [id])
+  linkedUser   User?         @relation("LinkedUser", fields: [linkedUserId], references: [id])
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  userId       String
+  linkedUserId String?
+  Transaction  Transaction[]
+  balance      Float         @default(0)
 
   @@unique([name, userId], name: "UniqueAccountName")
 }

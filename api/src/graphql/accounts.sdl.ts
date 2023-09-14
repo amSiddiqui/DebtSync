@@ -10,6 +10,7 @@ export const schema = gql`
     userId: String!
     linkedUserId: String
     Transaction: [Transaction]!
+    balance: Float!
   }
 
   type Query {
@@ -22,6 +23,7 @@ export const schema = gql`
     name: String!
     userId: String!
     linkedUserId: String
+    balance: Float!
   }
 
   input UpdateAccountInput {
@@ -29,6 +31,7 @@ export const schema = gql`
     name: String
     userId: String
     linkedUserId: String
+    balance: Float
   }
 
   type Mutation {

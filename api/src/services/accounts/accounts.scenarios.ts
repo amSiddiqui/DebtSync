@@ -8,12 +8,12 @@ export const standard = defineScenario<Prisma.AccountCreateArgs>({
       data: {
         status: 'String',
         name: 'String',
-        updatedAt: '2023-09-14T16:03:44.170Z',
+        updatedAt: '2023-09-14T20:17:53.672Z',
         user: {
           create: {
             id: 'String',
-            email: 'String5608810',
-            updatedAt: '2023-09-14T16:03:44.170Z',
+            email: 'String214059',
+            updatedAt: '2023-09-14T20:17:53.672Z',
           },
         },
       },
@@ -22,12 +22,12 @@ export const standard = defineScenario<Prisma.AccountCreateArgs>({
       data: {
         status: 'String',
         name: 'String',
-        updatedAt: '2023-09-14T16:03:44.170Z',
+        updatedAt: '2023-09-14T20:17:53.672Z',
         user: {
           create: {
             id: 'String2',
-            email: 'String6026573',
-            updatedAt: '2023-09-14T16:03:44.170Z',
+            email: 'String7183665',
+            updatedAt: '2023-09-14T20:17:53.672Z',
           },
         },
       },

@@ -11,6 +11,7 @@
 // See https://storybook.js.org/docs/react/writing-stories/args.
 
 import type { Meta, StoryObj } from '@storybook/react'
+import { Account } from 'types/graphql'
 
 import AccountCard from './AccountCard'
 
@@ -22,4 +23,12 @@ export default meta
 
 type Story = StoryObj<typeof AccountCard>
 
-export const Primary: Story = {}
+export const Primary: Story = {
+  args: {
+    account: {
+      id: 1,
+      name: 'Account',
+      status: 'active',
+    } as Account,
+  },
+}

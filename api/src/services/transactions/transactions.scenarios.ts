@@ -6,21 +6,21 @@ export const standard = defineScenario<Prisma.TransactionCreateArgs>({
   transaction: {
     one: {
       data: {
-        amount: 9302060,
+        amount: 3230699,
         debit: true,
         title: 'String',
         description: 'String',
-        updatedAt: '2023-09-14T16:03:51.867Z',
+        updatedAt: '2023-09-14T20:18:01.461Z',
         account: {
           create: {
             status: 'String',
             name: 'String',
-            updatedAt: '2023-09-14T16:03:51.867Z',
+            updatedAt: '2023-09-14T20:18:01.461Z',
             user: {
               create: {
                 id: 'String',
-                email: 'String1306627',
-                updatedAt: '2023-09-14T16:03:51.867Z',
+                email: 'String6344763',
+                updatedAt: '2023-09-14T20:18:01.461Z',
               },
             },
           },
@@ -29,21 +29,21 @@ export const standard = defineScenario<Prisma.TransactionCreateArgs>({
     },
     two: {
       data: {
-        amount: 7745106,
+        amount: 6930532,
         debit: true,
         title: 'String',
         description: 'String',
-        updatedAt: '2023-09-14T16:03:51.867Z',
+        updatedAt: '2023-09-14T20:18:01.461Z',
         account: {
           create: {
             status: 'String',
             name: 'String',
-            updatedAt: '2023-09-14T16:03:51.867Z',
+            updatedAt: '2023-09-14T20:18:01.461Z',
             user: {
               create: {
                 id: 'String2',
-                email: 'String6616923',
-                updatedAt: '2023-09-14T16:03:51.867Z',
+                email: 'String210194',
+                updatedAt: '2023-09-14T20:18:01.461Z',
               },
             },
           },

@@ -51,6 +51,7 @@ const AddAccount = () => {
             name: data.name,
             status: 'active',
             userId: userMetadata.sub,
+            balance: 0,
           },
         },
       })

@@ -32,14 +32,16 @@ describe('accounts', () => {
     const result = await createAccount({
       input: {
         status: 'String',
-        name: 'String2',
+        name: 'String3',
         userId: scenario.account.two.userId,
+        balance: 0,
       },
     })
 
     expect(result.status).toEqual('String')
-    expect(result.name).toEqual('String2')
+    expect(result.name).toEqual('String3')
     expect(result.userId).toEqual(scenario.account.two.userId)
+    expect(result.balance).toEqual(0)
   })
 
   scenario('updates a account', async (scenario: StandardScenario) => {

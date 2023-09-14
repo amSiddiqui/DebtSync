@@ -34,7 +34,7 @@ describe('transactions', () => {
   scenario('creates a transaction', async (scenario: StandardScenario) => {
     const result = await createTransaction({
       input: {
-        amount: 6486999,
+        amount: 7653664,
         debit: true,
         title: 'String',
         description: 'String',
@@ -42,7 +42,7 @@ describe('transactions', () => {
       },
     })
 
-    expect(result.amount).toEqual(6486999)
+    expect(result.amount).toEqual(7653664)
     expect(result.debit).toEqual(true)
     expect(result.title).toEqual('String')
     expect(result.description).toEqual('String')
@@ -55,10 +55,10 @@ describe('transactions', () => {
     })) as Transaction
     const result = await updateTransaction({
       id: original.id,
-      input: { amount: 9543891 },
+      input: { amount: 8165453 },
     })
 
-    expect(result.amount).toEqual(9543891)
+    expect(result.amount).toEqual(8165453)
   })
 
   scenario('deletes a transaction', async (scenario: StandardScenario) => {
