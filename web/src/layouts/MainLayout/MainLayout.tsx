@@ -3,7 +3,6 @@ import {
   Header,
   Navbar,
   useMantineTheme,
-  Text,
   MediaQuery,
   Burger,
   Group,

@@ -1,6 +1,6 @@
 export const schema = gql`
   type AccountUser {
-    id: String!
+    id: Int!
     name: String!
     user: User
     userId: String
@@ -9,7 +9,7 @@ export const schema = gql`
 
   type Query {
     accountUsers: [AccountUser!]! @requireAuth
-    accountUser(id: String!): AccountUser @requireAuth
+    accountUser(id: Int!): AccountUser @requireAuth
   }
 
   input CreateAccountUserInput {
@@ -24,10 +24,8 @@ export const schema = gql`
 
   type Mutation {
     createAccountUser(input: CreateAccountUserInput!): AccountUser! @requireAuth
-    updateAccountUser(
-      id: String!
-      input: UpdateAccountUserInput!
-    ): AccountUser! @requireAuth
-    deleteAccountUser(id: String!): AccountUser! @requireAuth
+    updateAccountUser(id: Int!, input: UpdateAccountUserInput!): AccountUser!
+      @requireAuth
+    deleteAccountUser(id: Int!): AccountUser! @requireAuth
   }
 `

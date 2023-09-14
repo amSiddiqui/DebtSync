@@ -32,14 +32,12 @@ describe('accounts', () => {
     const result = await createAccount({
       input: {
         status: 'String',
-        updatedAt: '2023-09-13T18:01:06.240Z',
         userId: scenario.account.two.userId,
         accountUserId: scenario.account.two.accountUserId,
       },
     })
 
     expect(result.status).toEqual('String')
-    expect(result.updatedAt).toEqual(new Date('2023-09-13T18:01:06.240Z'))
     expect(result.userId).toEqual(scenario.account.two.userId)
     expect(result.accountUserId).toEqual(scenario.account.two.accountUserId)
   })

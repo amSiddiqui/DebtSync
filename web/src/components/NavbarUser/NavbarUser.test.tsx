@@ -1,6 +1,6 @@
 import { render } from '@redwoodjs/testing/web'
 
-import NavbarUser from './NavbarUser'
+import { NavbarUser } from './NavbarUser'
 
 //   Improve this test with help from the Redwood Testing Doc:
 //    https://redwoodjs.com/docs/testing#testing-components
@@ -8,7 +8,7 @@ import NavbarUser from './NavbarUser'
 describe('NavbarUser', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<NavbarUser />)
+      render(<NavbarUser id={'42'} />)
     }).not.toThrow()
   })
 })

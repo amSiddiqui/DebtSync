@@ -33,10 +33,9 @@ describe('accountUsers', () => {
 
   scenario('creates a accountUser', async () => {
     const result = await createAccountUser({
-      input: { id: 'String', name: 'String' },
+      input: { name: 'String' },
     })
 
-    expect(result.id).toEqual('String')
     expect(result.name).toEqual('String')
   })
 
@@ -46,10 +45,10 @@ describe('accountUsers', () => {
     })) as AccountUser
     const result = await updateAccountUser({
       id: original.id,
-      input: { id: 'String2' },
+      input: { name: 'String2' },
     })
 
-    expect(result.id).toEqual('String2')
+    expect(result.name).toEqual('String2')
   })
 
   scenario('deletes a accountUser', async (scenario: StandardScenario) => {

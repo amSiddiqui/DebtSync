@@ -7,7 +7,7 @@ export const schema = gql`
     createdAt: DateTime!
     updatedAt: DateTime!
     userId: String!
-    accountUserId: String!
+    accountUserId: Int!
     Transaction: [Transaction]!
   }
 
@@ -19,13 +19,13 @@ export const schema = gql`
   input CreateAccountInput {
     status: String!
     userId: String!
-    accountUserId: String!
+    accountUserId: Int!
   }
 
   input UpdateAccountInput {
     status: String
     userId: String
-    accountUserId: String
+    accountUserId: Int
   }
 
   type Mutation {

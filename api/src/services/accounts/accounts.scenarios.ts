@@ -6,29 +6,29 @@ export const standard = defineScenario<Prisma.AccountCreateArgs>({
     one: {
       data: {
         status: 'String',
-        updatedAt: '2023-09-13T18:01:06.254Z',
+        updatedAt: '2023-09-14T12:00:41.665Z',
         primaryUser: {
           create: {
             id: 'String',
-            email: 'String3441915',
-            updatedAt: '2023-09-13T18:01:06.254Z',
+            email: 'String1464816',
+            updatedAt: '2023-09-14T12:00:41.665Z',
           },
         },
-        secondaryUser: { create: { id: 'String', name: 'String' } },
+        secondaryUser: { create: { name: 'String' } },
       },
     },
     two: {
       data: {
         status: 'String',
-        updatedAt: '2023-09-13T18:01:06.254Z',
+        updatedAt: '2023-09-14T12:00:41.665Z',
         primaryUser: {
           create: {
-            id: 'String',
-            email: 'String9177123',
-            updatedAt: '2023-09-13T18:01:06.254Z',
+            id: 'String2',
+            email: 'String8763572',
+            updatedAt: '2023-09-14T12:00:41.665Z',
           },
         },
-        secondaryUser: { create: { id: 'String', name: 'String' } },
+        secondaryUser: { create: { name: 'String' } },
       },
     },
   },
