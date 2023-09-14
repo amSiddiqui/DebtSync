@@ -1,4 +1,11 @@
-import { Box, Button, Modal, Stack, TextInput } from '@mantine/core'
+import {
+  Box,
+  Button,
+  Modal,
+  NumberInput,
+  Stack,
+  TextInput,
+} from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { Plus } from 'tabler-icons-react'
 import {
@@ -23,6 +30,7 @@ const CREATE_ACCOUNT_MUTATION = gql`
 
 interface FormValues {
   name: string
+  balance: number
 }
 
 const AddAccount = () => {
@@ -51,7 +59,7 @@ const AddAccount = () => {
             name: data.name,
             status: 'active',
             userId: userMetadata.sub,
-            balance: 0,
+            balance: data.balance,
           },
         },
       })
@@ -78,12 +86,31 @@ const AddAccount = () => {
                 <TextInput
                   onChange={onChange}
                   onBlur={onBlur}
+                  withAsterisk
                   value={value ? value : ''}
                   ref={ref}
                   label="Name"
                   name={name}
                   error={error && error.message}
                   placeholder="Enter Account Name"
+                />
+              )}
+            />
+            <Controller
+              name="balance"
+              render={({
+                field: { onChange, onBlur, value, name, ref },
+                fieldState: { error },
+              }) => (
+                <NumberInput
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value ? value : ''}
+                  ref={ref}
+                  label="Initial Balance"
+                  name={name}
+                  error={error && error.message}
+                  placeholder="0.0"
                 />
               )}
             />

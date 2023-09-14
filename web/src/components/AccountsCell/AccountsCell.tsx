@@ -1,4 +1,4 @@
-import { Grid } from '@mantine/core'
+import { Grid, Text, Loader, Flex } from '@mantine/core'
 import type { Account, AccountsQuery } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -11,13 +11,18 @@ export const QUERY = gql`
       id
       name
       status
+      balance
     }
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => (
+  <Flex justify={'center'} align={'center'} h={'5rem'}>
+    <Loader variant="dots" />
+  </Flex>
+)
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => <Text>No Accounts Found</Text>
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>

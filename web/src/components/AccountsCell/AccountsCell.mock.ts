@@ -1,4 +1,8 @@
-// Define your own mock data here:
-export const standard = (/* vars, { ctx, req } */) => ({
-  accounts: [{ id: 42 }, { id: 43 }, { id: 44 }],
+export const standard = () => ({
+  accounts: [
+    { id: 1, name: 'John Doe', status: 'active', balance: 1000 },
+    { id: 2, name: 'Jane Doe', status: 'active', balance: -500 },
+    { id: 3, name: 'Bob Smith', status: 'active', balance: 2500 },
+    { id: 4, name: 'Alice Johnson', status: 'active', balance: -1000 },
+  ],
 })
