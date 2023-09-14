@@ -1,4 +1,4 @@
-import { Box, Group, Title } from '@mantine/core'
+import { Box, Group, Space, Title } from '@mantine/core'
 
 import { MetaTags } from '@redwoodjs/web'
 
@@ -20,6 +20,7 @@ const HomePage = () => {
           <AddAccount />
         </Box>
       </Group>
+      <Space h="lg" />
       <AccountsCell />
     </>
   )
