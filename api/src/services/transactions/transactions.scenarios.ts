@@ -5,46 +5,48 @@ export const standard = defineScenario<Prisma.TransactionCreateArgs>({
   transaction: {
     one: {
       data: {
-        amount: 4409922,
+        amount: 5894979,
         debit: true,
         title: 'String',
         description: 'String',
-        updatedAt: '2023-09-14T12:00:51.161Z',
+        updatedAt: '2023-09-14T14:05:07.140Z',
         account: {
           create: {
             status: 'String',
-            updatedAt: '2023-09-14T12:00:51.161Z',
-            primaryUser: {
+            name: 'String',
+            updatedAt: '2023-09-14T14:05:07.140Z',
+            accountUserId: 565076,
+            user: {
               create: {
                 id: 'String',
-                email: 'String881482',
-                updatedAt: '2023-09-14T12:00:51.161Z',
+                email: 'String8773367',
+                updatedAt: '2023-09-14T14:05:07.140Z',
               },
             },
-            secondaryUser: { create: { name: 'String' } },
           },
         },
       },
     },
     two: {
       data: {
-        amount: 9039796,
+        amount: 9523137,
         debit: true,
         title: 'String',
         description: 'String',
-        updatedAt: '2023-09-14T12:00:51.161Z',
+        updatedAt: '2023-09-14T14:05:07.140Z',
         account: {
           create: {
             status: 'String',
-            updatedAt: '2023-09-14T12:00:51.161Z',
-            primaryUser: {
+            name: 'String',
+            updatedAt: '2023-09-14T14:05:07.140Z',
+            accountUserId: 4184139,
+            user: {
               create: {
                 id: 'String2',
-                email: 'String7794776',
-                updatedAt: '2023-09-14T12:00:51.161Z',
+                email: 'String8101525',
+                updatedAt: '2023-09-14T14:05:07.140Z',
               },
             },
-            secondaryUser: { create: { name: 'String' } },
           },
         },
       },

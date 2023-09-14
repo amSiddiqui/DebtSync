@@ -30,8 +30,6 @@ interface UserFormValues {
 const NewUserModal = () => {
   const { userMetadata } = useAuth()
 
-  console.log({ userMetadata })
-
   const [showModal, setShowModal] = React.useState(true)
 
   const [create, { loading, error }] = useMutation<

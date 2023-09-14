@@ -2,11 +2,13 @@ export const schema = gql`
   type Account {
     id: Int!
     status: String!
-    primaryUser: User!
-    secondaryUser: AccountUser!
+    name: String!
+    user: User!
+    linkedUser: User
     createdAt: DateTime!
     updatedAt: DateTime!
     userId: String!
+    linkedUserId: String
     accountUserId: Int!
     Transaction: [Transaction]!
   }
@@ -18,13 +20,17 @@ export const schema = gql`
 
   input CreateAccountInput {
     status: String!
+    name: String!
     userId: String!
+    linkedUserId: String
     accountUserId: Int!
   }
 
   input UpdateAccountInput {
     status: String
+    name: String
     userId: String
+    linkedUserId: String
     accountUserId: Int
   }
 

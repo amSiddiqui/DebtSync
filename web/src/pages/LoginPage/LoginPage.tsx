@@ -9,7 +9,6 @@ import { useAuth } from 'src/auth'
 const LoginPage = () => {
   const { isAuthenticated, loading, logIn } = useAuth()
   const [loginCalled, setLoginCalled] = useState(false)
-  console.log({ isAuthenticated, loading, logIn })
 
   useEffect(() => {
     if (!loading && !isAuthenticated && !loginCalled) {
