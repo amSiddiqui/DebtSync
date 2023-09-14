@@ -1,3 +1,5 @@
+import { Account } from 'types/graphql'
+
 import { render } from '@redwoodjs/testing/web'
 
 import AccountCard from './AccountCard'
@@ -8,7 +10,11 @@ import AccountCard from './AccountCard'
 describe('AccountCard', () => {
   it('renders successfully', () => {
     expect(() => {
-      render(<AccountCard />)
+      render(
+        <AccountCard
+          account={{ id: 1, name: 'test', status: 'active' } as Account}
+        />
+      )
     }).not.toThrow()
   })
 })
