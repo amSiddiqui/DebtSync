@@ -1,18 +1,12 @@
 import React from 'react'
 
-import {
-  UnstyledButton,
-  Box,
-  useMantineTheme,
-  rem,
-  Menu
-} from '@mantine/core'
-
-import UserCell from 'src/components/UserCell'
+import { UnstyledButton, Box, useMantineTheme, rem, Menu } from '@mantine/core'
 import { Logout, Settings } from 'tabler-icons-react'
 
+import UserCell from 'src/components/UserCell'
+
 interface NavbarUserProps {
-  id: string,
+  id: string
   logOutCallback?: () => void
 }
 
@@ -57,9 +51,14 @@ export function NavbarUser({ id, logOutCallback }: NavbarUserProps) {
         <Menu.Dropdown>
           <Menu.Label>Profile</Menu.Label>
           <Menu.Item icon={<Settings size={14} />}>Settings</Menu.Item>
-          <Menu.Item onClick={() => {
-            logOutCallback && logOutCallback()
-          }} icon={<Logout size={14} />}>Log Out</Menu.Item>
+          <Menu.Item
+            onClick={() => {
+              logOutCallback && logOutCallback()
+            }}
+            icon={<Logout size={14} />}
+          >
+            Log Out
+          </Menu.Item>
         </Menu.Dropdown>
       </Menu>
     </Box>

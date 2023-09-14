@@ -1,7 +1,24 @@
 import { Box, Button, Modal, Stack, TextInput } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { Plus } from 'tabler-icons-react'
+import {
+  CreateAccountMutation,
+  CreateAccountMutationVariables,
+} from 'types/graphql'
+
 import { Form, Controller, SubmitHandler } from '@redwoodjs/forms'
+import { useMutation } from '@redwoodjs/web'
+import { Toaster, toast } from '@redwoodjs/web/dist/toast'
+
+import { useAuth } from 'src/auth'
+
+const CREATE_ACCOUNT_MUTATION = gql`
+  mutation CreateAccountMutation($input: CreateAccountInput!) {
+    createAccount(input: $input) {
+      id
+    }
+  }
+`
 
 interface FormValues {
   name: string
@@ -9,13 +26,39 @@ interface FormValues {
 
 const AddAccount = () => {
   const [opened, { open, close }] = useDisclosure(false)
+
+  const { userMetadata } = useAuth()
+
+  const [create, { loading, error }] = useMutation<
+    CreateAccountMutation,
+    CreateAccountMutationVariables
+  >(CREATE_ACCOUNT_MUTATION, {
+    onCompleted: () => {
+      toast.success('Account Created')
+      close()
+    },
+  })
+
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    console.log(data)
+    if (!userMetadata) {
+      toast.error('Not Authenticated. Please login again')
+    } else {
+      create({
+        variables: {
+          input: {
+            name: data.name,
+            status: 'active',
+            userId: userMetadata.sub,
+          },
+        },
+      })
+    }
   }
   return (
     <>
+      <Toaster />
       <Modal opened={opened} onClose={close} title="Add Account">
-        <Form onSubmit={onSubmit} config={{ mode: 'onBlur' }}>
+        <Form onSubmit={onSubmit} config={{ mode: 'onBlur' }} error={error}>
           <Stack>
             <Controller
               name="name"
@@ -47,12 +90,18 @@ const AddAccount = () => {
                 textAlign: 'right',
               }}
             >
-              <Button type="submit" leftIcon={<Plus size={'1rem'} />}>Add</Button>
+              <Button type="submit" leftIcon={<Plus size={'1rem'} />}>
+                Add
+              </Button>
             </Box>
           </Stack>
         </Form>
       </Modal>
-      <Button onClick={open} leftIcon={<Plus size={'1rem'} />}>
+      <Button
+        disabled={loading}
+        onClick={open}
+        leftIcon={<Plus size={'1rem'} />}
+      >
         Add Account
       </Button>
     </>

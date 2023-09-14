@@ -1,19 +1,23 @@
 import { Group, ThemeIcon, UnstyledButton, Text } from '@mantine/core'
+
 import { Link, routes } from '@redwoodjs/router'
 
 interface Props {
   color: string
   icon: React.ReactNode
-  label: string,
+  label: string
   to: string
 }
 
 const NavbarLink = ({ color, icon, label, to }: Props) => {
   return (
-    <Link style={{
-      textDecoration: 'none',
-      color: 'inherit'
-    }} to={to}>
+    <Link
+      style={{
+        textDecoration: 'none',
+        color: 'inherit',
+      }}
+      to={to}
+    >
       <UnstyledButton
         sx={(theme) => ({
           display: 'block',

@@ -1,8 +1,9 @@
-import { Box, Button, Group, Text, Title } from '@mantine/core'
+import { Box, Group, Title } from '@mantine/core'
 
 import { MetaTags } from '@redwoodjs/web'
+
+import AccountsCell from 'src/components/AccountsCell'
 import AddAccount from 'src/components/AddAccount/AddAccount'
-import { Plus } from 'tabler-icons-react'
 
 const HomePage = () => {
   return (
@@ -11,12 +12,15 @@ const HomePage = () => {
 
       <Group grow>
         <Title>Accounts</Title>
-        <Box sx={{
-          textAlign: 'right'
-        }}>
+        <Box
+          sx={{
+            textAlign: 'right',
+          }}
+        >
           <AddAccount />
         </Box>
       </Group>
+      <AccountsCell />
     </>
   )
 }

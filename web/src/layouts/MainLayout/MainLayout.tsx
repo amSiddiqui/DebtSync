@@ -13,10 +13,11 @@ import {
 } from '@mantine/core'
 import { Sun, MoonStars, Home } from 'tabler-icons-react'
 
-import { useAuth } from 'src/auth'
-import { NavbarUser } from 'src/components/NavbarUser/NavbarUser'
-import NavbarLink from 'src/components/NavbarLink/NavbarLink'
 import { routes } from '@redwoodjs/router'
+
+import { useAuth } from 'src/auth'
+import NavbarLink from 'src/components/NavbarLink/NavbarLink'
+import { NavbarUser } from 'src/components/NavbarUser/NavbarUser'
 
 type MainLayoutProps = {
   children?: React.ReactNode
@@ -49,14 +50,22 @@ const MainLayout = ({ children }: MainLayoutProps) => {
           hiddenBreakpoint="sm"
         >
           <Navbar.Section grow mt="xs">
-            <NavbarLink color="blue" icon={<Home size="1rem" />} label="Home" to={routes.home()} />
+            <NavbarLink
+              color="blue"
+              icon={<Home size="1rem" />}
+              label="Home"
+              to={routes.home()}
+            />
           </Navbar.Section>
           <Navbar.Section>
             {isAuthenticated && currentUser && (
-              <NavbarUser logOutCallback={() => {
-                logOut()
-                setOpened(false)
-              }} id={currentUser.sub as string} />
+              <NavbarUser
+                logOutCallback={() => {
+                  logOut()
+                  setOpened(false)
+                }}
+                id={currentUser.sub as string}
+              />
             )}
           </Navbar.Section>
         </Navbar>

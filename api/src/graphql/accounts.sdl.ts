@@ -9,7 +9,6 @@ export const schema = gql`
     updatedAt: DateTime!
     userId: String!
     linkedUserId: String
-    accountUserId: Int!
     Transaction: [Transaction]!
   }
 
@@ -23,7 +22,6 @@ export const schema = gql`
     name: String!
     userId: String!
     linkedUserId: String
-    accountUserId: Int!
   }
 
   input UpdateAccountInput {
@@ -31,7 +29,6 @@ export const schema = gql`
     name: String
     userId: String
     linkedUserId: String
-    accountUserId: Int
   }
 
   type Mutation {

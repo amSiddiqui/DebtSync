@@ -30,7 +30,6 @@ model Account {
   updatedAt     DateTime      @updatedAt
   userId        String
   linkedUserId  String?
-  accountUserId Int
   Transaction   Transaction[]
 
   @@unique([name, userId], name: "UniqueAccountName")
