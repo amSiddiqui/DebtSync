@@ -11,7 +11,7 @@ import {
   ActionIcon,
   useMantineColorScheme,
 } from '@mantine/core'
-import { Sun, MoonStars, Home } from 'tabler-icons-react'
+import { Sun, MoonStars, Cash } from 'tabler-icons-react'
 
 import { routes } from '@redwoodjs/router'
 
@@ -51,9 +51,9 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         >
           <Navbar.Section grow mt="xs">
             <NavbarLink
-              color="blue"
-              icon={<Home size="1rem" />}
-              label="Home"
+              color="green"
+              icon={<Cash size="1rem" />}
+              label="Accounts"
               to={routes.home()}
             />
           </Navbar.Section>

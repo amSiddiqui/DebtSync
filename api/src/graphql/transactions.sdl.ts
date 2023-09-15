@@ -14,6 +14,7 @@ export const schema = gql`
   type Query {
     transactions: [Transaction!]! @requireAuth
     transaction(id: Int!): Transaction @requireAuth
+    accountTransactions(accountId: Int!): [Transaction!]! @requireAuth
   }
 
   input CreateTransactionInput {

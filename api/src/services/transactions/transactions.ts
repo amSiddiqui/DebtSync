@@ -16,6 +16,14 @@ export const transaction: QueryResolvers['transaction'] = ({ id }) => {
   })
 }
 
+export const accountTransactions: QueryResolvers['accountTransactions'] = ({
+  accountId,
+}) => {
+  return db.transaction.findMany({
+    where: { accountId },
+  })
+}
+
 export const createTransaction: MutationResolvers['createTransaction'] = ({
   input,
 }) => {

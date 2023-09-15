@@ -10,6 +10,12 @@ export const accounts: QueryResolvers['accounts'] = () => {
   return db.account.findMany()
 }
 
+export const userAccounts: QueryResolvers['userAccounts'] = ({ userId }) => {
+  return db.account.findMany({
+    where: { userId },
+  })
+}
+
 export const account: QueryResolvers['account'] = ({ id }) => {
   return db.account.findUnique({
     where: { id },

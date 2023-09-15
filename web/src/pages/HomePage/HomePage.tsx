@@ -2,10 +2,13 @@ import { Box, Group, Space, Title } from '@mantine/core'
 
 import { MetaTags } from '@redwoodjs/web'
 
+import { useAuth } from 'src/auth'
 import AccountsCell from 'src/components/AccountsCell'
 import AddAccount from 'src/components/AddAccount/AddAccount'
 
 const HomePage = () => {
+  const { userMetadata } = useAuth()
+
   return (
     <>
       <MetaTags title="Home" description="Home page" />
@@ -21,7 +24,7 @@ const HomePage = () => {
         </Box>
       </Group>
       <Space h="lg" />
-      <AccountsCell />
+      <AccountsCell userId={userMetadata ? userMetadata.sub : ''} />
     </>
   )
 }

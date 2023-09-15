@@ -12,7 +12,9 @@ describe('AccountCard', () => {
     expect(() => {
       render(
         <AccountCard
-          account={{ id: 1, name: 'test', status: 'active' } as Account}
+          account={
+            { id: 1, name: 'test', status: 'active', balance: 100 } as Account
+          }
         />
       )
     }).not.toThrow()

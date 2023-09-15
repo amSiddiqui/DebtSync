@@ -16,6 +16,7 @@ export const schema = gql`
   type Query {
     accounts: [Account!]! @requireAuth
     account(id: Int!): Account @requireAuth
+    userAccounts(userId: String!): [Account!]! @requireAuth
   }
 
   input CreateAccountInput {
