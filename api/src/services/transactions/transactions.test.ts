@@ -1,5 +1,7 @@
 import type { Transaction } from '@prisma/client'
 
+import { account } from '../accounts/accounts'
+
 import {
   transactions,
   transaction,
@@ -34,7 +36,7 @@ describe('transactions', () => {
   scenario('creates a transaction', async (scenario: StandardScenario) => {
     const result = await createTransaction({
       input: {
-        amount: 7653664,
+        amount: 4,
         debit: true,
         title: 'String',
         description: 'String',
@@ -42,11 +44,17 @@ describe('transactions', () => {
       },
     })
 
-    expect(result.amount).toEqual(7653664)
+    const affectedAccount = await account({
+      id: scenario.transaction.two.accountId,
+    })
+
+    expect(result.amount).toEqual(4)
     expect(result.debit).toEqual(true)
     expect(result.title).toEqual('String')
     expect(result.description).toEqual('String')
     expect(result.accountId).toEqual(scenario.transaction.two.accountId)
+
+    expect(affectedAccount.balance).toEqual(6)
   })
 
   scenario('updates a transaction', async (scenario: StandardScenario) => {
@@ -55,10 +63,15 @@ describe('transactions', () => {
     })) as Transaction
     const result = await updateTransaction({
       id: original.id,
-      input: { amount: 8165453 },
+      input: { amount: 7 },
     })
 
-    expect(result.amount).toEqual(8165453)
+    const affectedAccount = await account({
+      id: scenario.transaction.one.accountId,
+    })
+
+    expect(result.amount).toEqual(7)
+    expect(affectedAccount.balance).toEqual(7)
   })
 
   scenario('deletes a transaction', async (scenario: StandardScenario) => {

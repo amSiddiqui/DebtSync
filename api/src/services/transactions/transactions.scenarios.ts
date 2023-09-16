@@ -29,7 +29,7 @@ export const standard = defineScenario<Prisma.TransactionCreateArgs>({
     },
     two: {
       data: {
-        amount: 6930532,
+        amount: 2,
         debit: true,
         title: 'String',
         description: 'String',
