@@ -7,9 +7,10 @@ interface Props {
   icon: React.ReactNode
   label: string
   to: string
+  clickCallBack?: () => void
 }
 
-const NavbarLink = ({ color, icon, label, to }: Props) => {
+const NavbarLink = ({ color, icon, label, to, clickCallBack }: Props) => {
   return (
     <Link
       style={{
@@ -19,6 +20,7 @@ const NavbarLink = ({ color, icon, label, to }: Props) => {
       to={to}
     >
       <UnstyledButton
+        onClick={clickCallBack}
         sx={(theme) => ({
           display: 'block',
           width: '100%',

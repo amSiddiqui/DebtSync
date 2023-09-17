@@ -1,7 +1,8 @@
 import {
   Avatar,
   Box,
-  Group,
+  Center,
+  Grid,
   Loader,
   Modal,
   Stack,
@@ -9,7 +10,6 @@ import {
   rem,
   useMantineTheme,
 } from '@mantine/core'
-import _ from 'lodash'
 import { ChevronRight } from 'tabler-icons-react'
 import type { FindUserQuery, FindUserQueryVariables } from 'types/graphql'
 
@@ -75,17 +75,27 @@ export const Success = ({
   const email = userMetadata ? userMetadata.email : ''
 
   return (
-    <Group>
-      <Avatar radius="xl">{user.name[0]}</Avatar>
-      <Box sx={{ flex: 1 }}>
-        <Text size="sm" weight={500}>
-          {user.name}
-        </Text>
-        <Text color="dimmed" size="xs">
-          {_.truncate(email, { length: 25 })}
-        </Text>
-      </Box>
-      <ChevronRight size={rem(18)} />
-    </Group>
+    <Grid>
+      <Grid.Col span={2}>
+        <Center h={'100%'} w={'100%'}>
+          <Avatar radius="xl">{user.name[0]}</Avatar>
+        </Center>
+      </Grid.Col>
+      <Grid.Col span={8}>
+        <Box>
+          <Text size="sm" weight={500}>
+            {user.name}
+          </Text>
+          <Text color="dimmed" truncate size="xs">
+            {email}
+          </Text>
+        </Box>
+      </Grid.Col>
+      <Grid.Col span={2}>
+        <Center h={'100%'}>
+          <ChevronRight size={rem(18)} />
+        </Center>
+      </Grid.Col>
+    </Grid>
   )
 }

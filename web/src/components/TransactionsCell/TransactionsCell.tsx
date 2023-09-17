@@ -27,10 +27,19 @@ export const Success = ({
   accountTransactions,
 }: CellSuccessProps<TransactionsQuery>) => {
   return (
-    <ul>
+    <>
       {accountTransactions.map((item) => {
-        return <li key={item.id}>{JSON.stringify(item)}</li>
+        return (
+          <p
+            style={{
+              wordBreak: 'break-all',
+            }}
+            key={item.id}
+          >
+            {JSON.stringify(item)}
+          </p>
+        )
       })}
-    </ul>
+    </>
   )
 }

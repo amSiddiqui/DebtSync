@@ -44,8 +44,14 @@ const AccountCard = ({ account }: AccountCardProps) => {
               alignItems: 'baseline',
             }}
           >
-            <Text size={'lg'}>£</Text>
-            <Title order={1} weight={500}>
+            <Text size={'lg'} color={account.balance < 0 ? 'red' : 'green'}>
+              £
+            </Text>
+            <Title
+              order={1}
+              color={account.balance < 0 ? 'red' : 'green'}
+              weight={500}
+            >
               {account.balance.toLocaleString('en-GB', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,

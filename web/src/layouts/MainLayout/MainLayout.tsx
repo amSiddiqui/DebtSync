@@ -51,6 +51,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
         >
           <Navbar.Section grow mt="xs">
             <NavbarLink
+              clickCallBack={() => setOpened(false)}
               color="green"
               icon={<Cash size="1rem" />}
               label="Accounts"
