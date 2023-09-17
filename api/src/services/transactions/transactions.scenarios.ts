@@ -9,6 +9,7 @@ export const standard = defineScenario<Prisma.TransactionCreateArgs>({
         amount: 3230699,
         debit: true,
         title: 'String',
+        date: '2023-09-14T20:18:01.461Z',
         description: 'String',
         updatedAt: '2023-09-14T20:18:01.461Z',
         account: {
@@ -32,6 +33,7 @@ export const standard = defineScenario<Prisma.TransactionCreateArgs>({
         amount: 2,
         debit: true,
         title: 'String',
+        date: '2023-09-14T20:18:01.461Z',
         description: 'String',
         updatedAt: '2023-09-14T20:18:01.461Z',
         account: {

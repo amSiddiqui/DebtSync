@@ -9,8 +9,8 @@ export const QUERY = gql`
       amount
       debit
       title
+      date
       description
-      createdAt
     }
   }
 `

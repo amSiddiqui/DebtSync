@@ -34,12 +34,14 @@ describe('transactions', () => {
   )
 
   scenario('creates a transaction', async (scenario: StandardScenario) => {
+    const now = new Date()
     const result = await createTransaction({
       input: {
         amount: 4,
         debit: true,
         title: 'String',
         description: 'String',
+        date: now,
         accountId: scenario.transaction.two.accountId,
       },
     })
@@ -51,6 +53,7 @@ describe('transactions', () => {
     expect(result.amount).toEqual(4)
     expect(result.debit).toEqual(true)
     expect(result.title).toEqual('String')
+    expect(result.date).toEqual(now)
     expect(result.description).toEqual('String')
     expect(result.accountId).toEqual(scenario.transaction.two.accountId)
 

@@ -3786,6 +3786,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mantine/dates@npm:^6.0.20":
+  version: 6.0.20
+  resolution: "@mantine/dates@npm:6.0.20"
+  dependencies:
+    "@mantine/utils": 6.0.20
+  peerDependencies:
+    "@mantine/core": 6.0.20
+    "@mantine/hooks": 6.0.20
+    dayjs: ">=1.0.0"
+    react: ">=16.8.0"
+  checksum: 7f66f73d3a38e2afd329710f25f73dde9eaca62d2cda4241b4b94345be17fcaabc0965f3f333c6623bfe4df83ad56e84c6d239e69928fffacbdef9a6651fe5d2
+  languageName: node
+  linkType: hard
+
 "@mantine/hooks@npm:^6.0.19":
   version: 6.0.19
   resolution: "@mantine/hooks@npm:6.0.19"
@@ -3815,6 +3829,15 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
   checksum: df4ec0925e2cc8f128903820bc5056f8353355c56a743a8b88d74cd08f1536e97b35838e3b6cd11056e56a7e3089122bb672bf654fc4aac04e32dfadab867149
+  languageName: node
+  linkType: hard
+
+"@mantine/utils@npm:6.0.20":
+  version: 6.0.20
+  resolution: "@mantine/utils@npm:6.0.20"
+  peerDependencies:
+    react: ">=16.8.0"
+  checksum: 53718ed2bdf8169724a315c48d701adbb9cda0f8c7a8d4d62d9852a7ad541256783cf7e57709b92fc60361a9ab8c3f2c4786f924244a6c8911ad063c0930f610
   languageName: node
   linkType: hard
 
@@ -11688,6 +11711,13 @@ __metadata:
   dependencies:
     "@babel/runtime": ^7.21.0
   checksum: e4b521fbf22bc8c3db332bbfb7b094fd3e7627de0259a9d17c7551e2d2702608a7307a449206065916538e384f37b181565447ce2637ae09828427aed9cb5581
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.11.9":
+  version: 1.11.9
+  resolution: "dayjs@npm:1.11.9"
+  checksum: 1697892de0f4107083ec72451ba86c947df61d9a67f8c52da991c5f8e347781baccec5c4c42e81a99e63cf603389ed324723cd77ad1b6fbd04f0f34433334979
   languageName: node
   linkType: hard
 
@@ -23936,12 +23966,14 @@ __metadata:
     "@emotion/react": ^11.11.1
     "@fontsource/roboto": ^5.0.8
     "@mantine/core": ^6.0.19
+    "@mantine/dates": ^6.0.20
     "@mantine/hooks": ^6.0.19
     "@redwoodjs/auth-auth0-web": 6.2.1
     "@redwoodjs/forms": 6.2.1
     "@redwoodjs/router": 6.2.1
     "@redwoodjs/vite": 6.2.1
     "@redwoodjs/web": 6.2.1
+    dayjs: ^1.11.9
     framer-motion: ^10.16.4
     lodash: ^4.17.21
     prop-types: 15.8.1

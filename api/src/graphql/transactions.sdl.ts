@@ -6,6 +6,7 @@ export const schema = gql`
     title: String!
     description: String!
     account: Account!
+    date: DateTime!
     createdAt: DateTime!
     updatedAt: DateTime!
     accountId: Int!
@@ -21,6 +22,7 @@ export const schema = gql`
     amount: Int!
     debit: Boolean!
     title: String!
+    date: DateTime!
     description: String!
     accountId: Int!
   }
@@ -29,6 +31,7 @@ export const schema = gql`
     amount: Int
     debit: Boolean
     title: String
+    date: DateTime
     description: String
     accountId: Int
   }

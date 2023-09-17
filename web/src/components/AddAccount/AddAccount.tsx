@@ -4,6 +4,7 @@ import {
   Modal,
   NumberInput,
   Stack,
+  Text,
   TextInput,
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
@@ -71,6 +72,15 @@ const AddAccount = () => {
       <Modal opened={opened} onClose={close} title="Add Account">
         <Form onSubmit={onSubmit} config={{ mode: 'onBlur' }} error={error}>
           <Stack>
+            {error && (
+              <Text
+                sx={{
+                  color: 'red',
+                }}
+              >
+                {error.message}
+              </Text>
+            )}
             <Controller
               name="name"
               rules={{

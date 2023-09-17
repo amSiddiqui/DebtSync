@@ -13,10 +13,12 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^2",
     "@fontsource/roboto": "^5.0.8",
+    "@mantine/dates": "^6.0.20",
     "@redwoodjs/auth-auth0-web": "6.2.1",
     "@redwoodjs/forms": "6.2.1",
     "@redwoodjs/router": "6.2.1",
     "@redwoodjs/web": "6.2.1",
+    "dayjs": "^1.11.9",
     "framer-motion": "^10.16.4",
     "lodash": "^4.17.21",
     "prop-types": "15.8.1",
