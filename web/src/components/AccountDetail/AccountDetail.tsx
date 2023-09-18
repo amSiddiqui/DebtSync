@@ -53,7 +53,7 @@ const AccountDetail = ({ account }: AccountDetailProps) => {
           <Flex align={'end'}>
             <CurrencyPound
               style={{
-                marginBottom: '0.2rem',
+                marginBottom: '0.4rem',
               }}
               color={account.balance < 0 ? 'red' : 'green'}
             />

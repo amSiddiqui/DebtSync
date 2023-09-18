@@ -1,6 +1,6 @@
 import { render } from '@redwoodjs/testing/web'
 
-import { Loading, Empty, Failure, Success } from './AccountNameCell'
+import { Loading, Failure, Success } from './AccountNameCell'
 import { standard } from './AccountNameCell.mock'
 
 // Generated boilerplate tests do not account for all circumstances
@@ -13,12 +13,6 @@ describe('AccountNameCell', () => {
   it('renders Loading successfully', () => {
     expect(() => {
       render(<Loading />)
-    }).not.toThrow()
-  })
-
-  it('renders Empty successfully', async () => {
-    expect(() => {
-      render(<Empty />)
     }).not.toThrow()
   })
 

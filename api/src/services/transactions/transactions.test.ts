@@ -1,5 +1,7 @@
 import type { Transaction } from '@prisma/client'
 
+import { ServiceValidationError } from '@redwoodjs/api'
+
 import { account } from '../accounts/accounts'
 
 import {
@@ -59,6 +61,33 @@ describe('transactions', () => {
 
     expect(affectedAccount.balance).toEqual(6)
   })
+
+  scenario(
+    'creates a transaction with inactive account',
+    async (scenario: StandardScenario) => {
+      const now = new Date()
+      let errorThrown = false
+      try {
+        await createTransaction({
+          input: {
+            amount: 4,
+            debit: true,
+            title: 'String',
+            description: 'String',
+            date: now,
+            accountId: scenario.transaction.three.accountId,
+          },
+        })
+      } catch (e) {
+        errorThrown = true
+        expect(e).toBeInstanceOf(ServiceValidationError)
+        expect(e.message).toEqual(
+          'Account is inactivate. Please activate it first.'
+        )
+      }
+      expect(errorThrown).toEqual(true)
+    }
+  )
 
   scenario('updates a transaction', async (scenario: StandardScenario) => {
     const original = (await transaction({

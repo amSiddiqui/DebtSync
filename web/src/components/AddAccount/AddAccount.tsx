@@ -14,7 +14,7 @@ import {
   CreateAccountMutationVariables,
 } from 'types/graphql'
 
-import { Form, Controller, SubmitHandler } from '@redwoodjs/forms'
+import { Form, Controller, SubmitHandler, useForm } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
 import { Toaster, toast } from '@redwoodjs/web/dist/toast'
 
@@ -36,6 +36,12 @@ interface FormValues {
 
 const AddAccount = () => {
   const [opened, { open, close }] = useDisclosure(false)
+  const formMethods = useForm<FormValues>({
+    defaultValues: {
+      name: '',
+      balance: 0,
+    },
+  })
 
   const { userMetadata } = useAuth()
 
@@ -46,6 +52,7 @@ const AddAccount = () => {
     onCompleted: () => {
       toast.success('Account Created')
       close()
+      formMethods.reset()
     },
     refetchQueries: [{ query: AccountsQuery }],
   })
@@ -70,7 +77,12 @@ const AddAccount = () => {
     <>
       <Toaster />
       <Modal opened={opened} onClose={close} title="Add Debt Account">
-        <Form onSubmit={onSubmit} config={{ mode: 'onBlur' }} error={error}>
+        <Form
+          formMethods={formMethods}
+          onSubmit={onSubmit}
+          config={{ mode: 'onBlur' }}
+          error={error}
+        >
           <Stack>
             {error && (
               <Text
@@ -142,7 +154,7 @@ const AddAccount = () => {
         onClick={open}
         leftIcon={<Plus size={'1rem'} />}
       >
-        Add Debt
+        Add Debt Account
       </Button>
     </>
   )

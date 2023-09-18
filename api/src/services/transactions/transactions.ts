@@ -4,6 +4,8 @@ import type {
   TransactionRelationResolvers,
 } from 'types/graphql'
 
+import { validateWith } from '@redwoodjs/api'
+
 import { db } from 'src/lib/db'
 
 export const transactions: QueryResolvers['transactions'] = () => {
@@ -26,10 +28,18 @@ export const accountTransactions: QueryResolvers['accountTransactions'] = ({
 
 export const createTransaction: MutationResolvers['createTransaction'] =
   async ({ input }) => {
+    const accountId = input.accountId
+
+    await validateWith(async () => {
+      const ac = await db.account.findUnique({ where: { id: accountId } })
+      if (ac.status !== 'active') {
+        throw 'Account is inactivate. Please activate it first.'
+      }
+    })
+
     const transaction = await db.transaction.create({
       data: input,
     })
-    const accountId = input.accountId
 
     const sum = await db.transaction.aggregate({
       where: { accountId },
@@ -46,6 +56,19 @@ export const createTransaction: MutationResolvers['createTransaction'] =
 
 export const updateTransaction: MutationResolvers['updateTransaction'] =
   async ({ id, input }) => {
+    await validateWith(async () => {
+      const ac = await db.transaction.findUnique({
+        where: { id },
+        include: {
+          account: true,
+        },
+      })
+
+      if (ac.account.status !== 'active') {
+        throw 'Account is inactivate. Please activate it first.'
+      }
+    })
+
     const transaction = await db.transaction.update({
       data: input,
       where: { id },
