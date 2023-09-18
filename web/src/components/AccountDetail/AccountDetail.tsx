@@ -4,6 +4,7 @@ import {
   Flex,
   Group,
   Badge,
+  Text,
   Grid,
   Center,
   useMantineTheme,
@@ -47,22 +48,31 @@ const AccountDetail = ({ account }: AccountDetailProps) => {
           </Center>
         </Grid.Col>
       </Grid>
-
-      <Group>
-        <Flex align={'end'}>
-          <CurrencyPound
-            style={{
-              marginBottom: '0.2rem',
-            }}
-            color={account.balance < 0 ? 'red' : 'green'}
-          />
-          <Title color={account.balance < 0 ? 'red' : 'green'}>
-            {account.balance.toLocaleString('en-GB', {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            })}
-          </Title>
-        </Flex>
+      <Group align="end">
+        <Group>
+          <Flex align={'end'}>
+            <CurrencyPound
+              style={{
+                marginBottom: '0.2rem',
+              }}
+              color={account.balance < 0 ? 'red' : 'green'}
+            />
+            <Title color={account.balance < 0 ? 'red' : 'green'}>
+              {account.balance.toLocaleString('en-GB', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </Title>
+          </Flex>
+        </Group>
+        <Text
+          fz="sm"
+          sx={{
+            marginBottom: '0.4rem',
+          }}
+        >
+          ({account.balance > 0 ? 'They owe you' : 'You owe them'} )
+        </Text>
       </Group>
     </Stack>
   )

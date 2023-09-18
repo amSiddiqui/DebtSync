@@ -54,7 +54,7 @@ const MainLayout = ({ children }: MainLayoutProps) => {
               clickCallBack={() => setOpened(false)}
               color="green"
               icon={<Cash size="1rem" />}
-              label="Accounts"
+              label="Debts"
               to={routes.home()}
             />
           </Navbar.Section>

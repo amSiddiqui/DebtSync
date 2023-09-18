@@ -182,7 +182,7 @@ const AddTransaction = ({ accountId }: AddTransactionProps) => {
                   label: (
                     <Center>
                       <TrendingDown size="1rem" />
-                      <Box ml={10}>Credit</Box>
+                      <Box ml={10}>Borrowed</Box>
                     </Center>
                   ),
                   value: 'credit',
@@ -191,7 +191,7 @@ const AddTransaction = ({ accountId }: AddTransactionProps) => {
                   label: (
                     <Center>
                       <TrendingUp size="1rem" />
-                      <Box ml={10}>Debit</Box>
+                      <Box ml={10}>Lent</Box>
                     </Center>
                   ),
                   value: 'debit',
@@ -243,7 +243,7 @@ const AddTransaction = ({ accountId }: AddTransactionProps) => {
                   value={value}
                   ref={ref}
                   label={`Amount (${
-                    txnType === 'credit' ? 'Credit' : 'Debit'
+                    txnType === 'credit' ? 'Borrowed' : 'Lent'
                   })`}
                   name={name}
                   error={error && error.message}

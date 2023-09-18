@@ -18,7 +18,7 @@ const Routes = () => {
       <Route path="/login" page={LoginPage} name="login" />
       <Private unauthenticated="login">
         <Set wrap={MainLayout}>
-          <Route path="/account/{id:Int}" page={AccountPage} name="account" />
+          <Route path="/debts/{id:Int}" page={AccountPage} name="account" />
           <Route path="/" page={HomePage} name="home" />
         </Set>
       </Private>

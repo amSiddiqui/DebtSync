@@ -14,7 +14,7 @@ const HomePage = () => {
       <MetaTags title="Home" description="Home page" />
 
       <Group grow>
-        <Title>Accounts</Title>
+        <Title>Debts</Title>
         <Box
           sx={{
             textAlign: 'right',

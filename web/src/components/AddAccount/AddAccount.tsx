@@ -69,7 +69,7 @@ const AddAccount = () => {
   return (
     <>
       <Toaster />
-      <Modal opened={opened} onClose={close} title="Add Account">
+      <Modal opened={opened} onClose={close} title="Add Debt Account">
         <Form onSubmit={onSubmit} config={{ mode: 'onBlur' }} error={error}>
           <Stack>
             {error && (
@@ -142,7 +142,7 @@ const AddAccount = () => {
         onClick={open}
         leftIcon={<Plus size={'1rem'} />}
       >
-        Add Account
+        Add Debt
       </Button>
     </>
   )

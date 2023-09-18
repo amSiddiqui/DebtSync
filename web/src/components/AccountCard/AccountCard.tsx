@@ -1,5 +1,14 @@
-import { Badge, Card, Group, Stack, Title, Text } from '@mantine/core'
+import {
+  Badge,
+  Card,
+  Group,
+  Stack,
+  Title,
+  Text,
+  useMantineTheme,
+} from '@mantine/core'
 import { motion } from 'framer-motion'
+import { CurrencyPound } from 'tabler-icons-react'
 import { Account } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -9,6 +18,8 @@ interface AccountCardProps {
 }
 
 const AccountCard = ({ account }: AccountCardProps) => {
+  const theme = useMantineTheme()
+
   return (
     <Link
       style={{
@@ -39,24 +50,49 @@ const AccountCard = ({ account }: AccountCardProps) => {
             </Badge>
           </Group>
           <Group
-            spacing={'xs'}
             sx={{
-              alignItems: 'baseline',
+              alignItems: 'end',
             }}
           >
-            <Text size={'lg'} color={account.balance < 0 ? 'red' : 'green'}>
-              £
-            </Text>
-            <Title
-              order={1}
-              color={account.balance < 0 ? 'red' : 'green'}
-              weight={500}
+            <Group
+              spacing={0}
+              sx={{
+                alignItems: 'end',
+              }}
             >
-              {account.balance.toLocaleString('en-GB', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-              })}
-            </Title>
+              <CurrencyPound
+                color={
+                  account.balance < 0
+                    ? theme.colors.red[8]
+                    : theme.colors.green[8]
+                }
+                style={{
+                  marginBottom: '0.4rem',
+                }}
+              />
+              <Title
+                order={1}
+                color={
+                  account.balance < 0
+                    ? theme.colors.red[8]
+                    : theme.colors.green[8]
+                }
+                weight={500}
+              >
+                {account.balance.toLocaleString('en-GB', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </Title>
+            </Group>
+            <Text
+              fz="sm"
+              sx={{
+                marginBottom: '0.4rem',
+              }}
+            >
+              ({account.balance > 0 ? 'They owe you' : 'You owe them'} )
+            </Text>
           </Group>
         </Stack>
       </Card>
