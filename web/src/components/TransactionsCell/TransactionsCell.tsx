@@ -1,6 +1,18 @@
+import { Box, Divider, Loader, Stack } from '@mantine/core'
 import type { TransactionsQuery } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+
+import TransactionCard from '../TransactionCard/TransactionCard'
+
+export type TransactionResult = {
+  id: number
+  amount: number
+  debit: boolean
+  title: string
+  date: string
+  description: string
+}
 
 export const QUERY = gql`
   query TransactionsQuery($accountId: Int!) {
@@ -15,7 +27,7 @@ export const QUERY = gql`
   }
 `
 
-export const Loading = () => <div>Loading...</div>
+export const Loading = () => <Loader variant="dots" />
 
 export const Empty = () => <div>Empty</div>
 
@@ -27,19 +39,15 @@ export const Success = ({
   accountTransactions,
 }: CellSuccessProps<TransactionsQuery>) => {
   return (
-    <>
-      {accountTransactions.map((item) => {
+    <Stack>
+      {accountTransactions.map((item, index) => {
         return (
-          <p
-            style={{
-              wordBreak: 'break-all',
-            }}
-            key={item.id}
-          >
-            {JSON.stringify(item)}
-          </p>
+          <Box key={item.id}>
+            <TransactionCard transaction={item} />
+            {accountTransactions.length - 1 !== index && <Divider my="lg" />}
+          </Box>
         )
       })}
-    </>
+    </Stack>
   )
 }

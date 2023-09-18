@@ -45,9 +45,7 @@ const AccountCard = ({ account }: AccountCardProps) => {
             <Title order={4} weight={500}>
               {account.name}
             </Title>
-            <Badge color="green" variant="light">
-              {account.status}
-            </Badge>
+            <Badge variant="light">{account.status}</Badge>
           </Group>
           <Group
             sx={{

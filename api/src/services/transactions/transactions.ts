@@ -23,6 +23,7 @@ export const accountTransactions: QueryResolvers['accountTransactions'] = ({
 }) => {
   return db.transaction.findMany({
     where: { accountId },
+    orderBy: { date: 'desc' },
   })
 }
 

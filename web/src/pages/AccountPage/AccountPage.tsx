@@ -1,4 +1,4 @@
-import { Divider, Flex, Title } from '@mantine/core'
+import { Flex, Space, Title } from '@mantine/core'
 
 import { MetaTags } from '@redwoodjs/web'
 
@@ -16,7 +16,7 @@ const AccountPage = ({ id }: AccountPageProps) => {
       <MetaTags title="Account" description="Account page" />
 
       <AccountNameCell id={id} />
-      <Divider my={'lg'} />
+      <Space h="lg" />
       <Flex
         sx={{
           marginBottom: '1rem',
@@ -32,6 +32,7 @@ const AccountPage = ({ id }: AccountPageProps) => {
         </Title>
         <AddTransaction accountId={id} />
       </Flex>
+      <Space h="lg" />
 
       <TransactionsCell accountId={id} />
     </>
