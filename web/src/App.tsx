@@ -1,10 +1,9 @@
-import { useState } from 'react'
-
 import {
   ColorScheme,
   ColorSchemeProvider,
   MantineProvider,
 } from '@mantine/core'
+import { useLocalStorage } from '@mantine/hooks'
 
 import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
@@ -23,29 +22,27 @@ import { AuthProvider, useAuth } from './auth'
 import './index.css'
 
 const App = () => {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>(() => {
-    const scheme = localStorage.getItem('mantine-color-scheme')
-    return scheme ? (scheme as ColorScheme) : 'light'
+  const [colorScheme, setColorScheme] = useLocalStorage({
+    key: 'mantine-color-scheme',
+    defaultValue: 'dark',
   })
-  const toggleColorScheme = (value?: ColorScheme) => {
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'))
-    localStorage.setItem('mantine-color-scheme', colorScheme)
-  }
 
   return (
     <FatalErrorBoundary page={FatalErrorPage}>
       <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
         <AuthProvider>
           <ColorSchemeProvider
-            colorScheme={colorScheme}
-            toggleColorScheme={toggleColorScheme}
+            colorScheme={colorScheme as ColorScheme}
+            toggleColorScheme={() => {
+              setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')
+            }}
           >
             <MantineProvider
               withGlobalStyles
               withNormalizeCSS
               theme={{
                 ...theme,
-                colorScheme,
+                colorScheme: colorScheme as ColorScheme,
               }}
             >
               <RedwoodApolloProvider useAuth={useAuth}>
