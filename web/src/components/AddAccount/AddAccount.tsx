@@ -54,7 +54,9 @@ const AddAccount = () => {
       close()
       formMethods.reset()
     },
-    refetchQueries: [{ query: AccountsQuery }],
+    refetchQueries: [
+      { query: AccountsQuery, variables: { userId: userMetadata.sub } },
+    ],
   })
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
