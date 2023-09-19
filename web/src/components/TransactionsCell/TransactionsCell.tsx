@@ -1,4 +1,4 @@
-import { Box, Divider, Loader, Stack } from '@mantine/core'
+import { Box, Divider, Loader, Stack, Text } from '@mantine/core'
 import type { TransactionsQuery } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -29,7 +29,7 @@ export const QUERY = gql`
 
 export const Loading = () => <Loader variant="dots" />
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => <Text>No transactions yet!</Text>
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>

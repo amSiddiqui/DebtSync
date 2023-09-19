@@ -3,6 +3,7 @@ import {
   Button,
   Center,
   Flex,
+  Indicator,
   Modal,
   NumberInput,
   SegmentedControl,
@@ -12,8 +13,9 @@ import {
   Textarea,
   useMantineTheme,
 } from '@mantine/core'
-import { DateInput } from '@mantine/dates'
+import { DatePickerInput } from '@mantine/dates'
 import { useDisclosure } from '@mantine/hooks'
+import dayjs from 'dayjs'
 import {
   Calendar,
   CurrencyPound,
@@ -156,7 +158,7 @@ const AddTransaction = ({ accountId }: AddTransactionProps) => {
                 field: { onChange, onBlur, value, name, ref },
                 fieldState: { error },
               }) => (
-                <DateInput
+                <DatePickerInput
                   onChange={onChange}
                   withAsterisk
                   clearable
@@ -168,6 +170,19 @@ const AddTransaction = ({ accountId }: AddTransactionProps) => {
                   name={name}
                   error={error && error.message}
                   placeholder="Transaction Date"
+                  renderDay={(date) => {
+                    // check if date is today
+                    return (
+                      <Indicator
+                        size={6}
+                        color="red"
+                        offset={-5}
+                        disabled={!dayjs(date).isSame(dayjs(), 'day')}
+                      >
+                        <div>{date.getDate()}</div>
+                      </Indicator>
+                    )
+                  }}
                 />
               )}
             />
