@@ -7,6 +7,9 @@ export const standard = () => ({
       title: 'Salary',
       description: 'Monthly salary payment',
       createdAt: '2022-01-01T00:00:00Z',
+      account: {
+        status: 'active',
+      },
     },
     {
       id: 2,
@@ -15,6 +18,9 @@ export const standard = () => ({
       title: 'Rent',
       description: 'Monthly rent payment',
       createdAt: '2022-01-02T00:00:00Z',
+      account: {
+        status: 'active',
+      },
     },
     {
       id: 3,
@@ -23,6 +29,9 @@ export const standard = () => ({
       title: 'Bonus',
       description: 'Year-end bonus payment',
       createdAt: '2022-01-03T00:00:00Z',
+      account: {
+        status: 'active',
+      },
     },
     {
       id: 4,
@@ -31,6 +40,9 @@ export const standard = () => ({
       title: 'Credit Card Payment',
       description: 'Monthly credit card payment',
       createdAt: '2022-01-04T00:00:00Z',
+      account: {
+        status: 'active',
+      },
     },
   ],
 })

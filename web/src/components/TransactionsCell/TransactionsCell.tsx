@@ -19,8 +19,11 @@ export type TransactionResult = {
 }
 
 export const QUERY = gql`
-  query TransactionsQuery($accountId: Int!) {
-    accountTransactions: accountTransactions(accountId: $accountId) {
+  query TransactionsQuery($accountId: Int!, $userId: String) {
+    accountTransactions: accountTransactions(
+      accountId: $accountId
+      userId: $userId
+    ) {
       id
       amount
       debit

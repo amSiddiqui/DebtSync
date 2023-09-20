@@ -24,6 +24,8 @@ import {
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 
+import { useAuth } from 'src/auth'
+
 import { QUERY as AccountQuery } from '../AccountNameCell'
 import TransactionModal, {
   FormValues,
@@ -34,8 +36,8 @@ import {
 } from '../TransactionsCell'
 
 const DELETE_TRANSACTION_MUTATION = gql`
-  mutation DeleteTransactionMutation($id: Int!) {
-    deleteTransaction(id: $id) {
+  mutation DeleteTransactionMutation($id: Int!, $userId: String!) {
+    deleteTransaction(id: $id, userId: $userId) {
       id
     }
   }
@@ -45,8 +47,9 @@ const UPDATE_TRANSACTION_MUTATION = gql`
   mutation UpdateTransactionMutation(
     $input: UpdateTransactionInput!
     $id: Int!
+    $userId: String!
   ) {
-    updateTransaction(input: $input, id: $id) {
+    updateTransaction(input: $input, id: $id, userId: $userId) {
       id
     }
   }
@@ -58,6 +61,7 @@ interface TractionCardProps {
 const TransactionCard = ({ transaction }: TractionCardProps) => {
   const isActive = transaction.account.status === 'active'
   const theme = useMantineTheme()
+  const { userMetadata } = useAuth()
   const xsQuery = useMediaQuery(`(max-width: ${theme.breakpoints.xs})`)
   const [openedDelete, { open: openDelete, close: closeDelete }] =
     useDisclosure(false)
@@ -76,11 +80,14 @@ const TransactionCard = ({ transaction }: TractionCardProps) => {
         refetchQueries: [
           {
             query: TransactionsQuery,
-            variables: { accountId: transaction.accountId },
+            variables: {
+              accountId: transaction.accountId,
+              userId: userMetadata.sub,
+            },
           },
           {
             query: AccountQuery,
-            variables: { id: transaction.accountId },
+            variables: { id: transaction.accountId, userId: userMetadata.sub },
           },
         ],
       }
@@ -97,11 +104,14 @@ const TransactionCard = ({ transaction }: TractionCardProps) => {
         refetchQueries: [
           {
             query: TransactionsQuery,
-            variables: { accountId: transaction.accountId },
+            variables: {
+              accountId: transaction.accountId,
+              userId: userMetadata.sub,
+            },
           },
           {
             query: AccountQuery,
-            variables: { id: transaction.accountId },
+            variables: { id: transaction.accountId, userId: userMetadata.sub },
           },
         ],
       }
@@ -119,6 +129,7 @@ const TransactionCard = ({ transaction }: TractionCardProps) => {
           date: data.date.toISOString(),
           debit: txnType === 'debit',
         },
+        userId: userMetadata.sub,
       },
     })
   }
@@ -232,6 +243,7 @@ const TransactionCard = ({ transaction }: TractionCardProps) => {
                 deleteTransaction({
                   variables: {
                     id: transaction.id,
+                    userId: userMetadata.sub,
                   },
                 })
               }}

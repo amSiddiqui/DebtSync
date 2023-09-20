@@ -10,6 +10,8 @@ import { useForm } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 
+import { useAuth } from 'src/auth'
+
 import { QUERY as AccountQuery } from '../AccountNameCell'
 import TransactionModal from '../TransactionModal/TransactionModal'
 import { FormValues } from '../TransactionModal/TransactionModal'
@@ -20,8 +22,11 @@ interface AddTransactionProps {
 }
 
 const CREATE_TRANSACTION_MUTATION = gql`
-  mutation CreateTransactionMutation($input: CreateTransactionInput!) {
-    createTransaction(input: $input) {
+  mutation CreateTransactionMutation(
+    $input: CreateTransactionInput!
+    $userId: String!
+  ) {
+    createTransaction(input: $input, userId: $userId) {
       id
     }
   }
@@ -29,6 +34,7 @@ const CREATE_TRANSACTION_MUTATION = gql`
 
 const AddTransaction = ({ accountId }: AddTransactionProps) => {
   const [opened, { open, close }] = useDisclosure(false)
+  const { userMetadata } = useAuth()
   const formMethods = useForm<FormValues>({
     defaultValues: {
       title: '',
@@ -48,8 +54,14 @@ const AddTransaction = ({ accountId }: AddTransactionProps) => {
       close()
     },
     refetchQueries: [
-      { query: TransactionsQuery, variables: { accountId } },
-      { query: AccountQuery, variables: { id: accountId } },
+      {
+        query: TransactionsQuery,
+        variables: { accountId, userId: userMetadata.sub },
+      },
+      {
+        query: AccountQuery,
+        variables: { id: accountId, userId: userMetadata.sub },
+      },
     ],
   })
 
@@ -66,6 +78,7 @@ const AddTransaction = ({ accountId }: AddTransactionProps) => {
           debit: txnType === 'debit',
           accountId,
         },
+        userId: userMetadata.sub,
       },
     })
   }

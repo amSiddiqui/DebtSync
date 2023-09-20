@@ -8,32 +8,31 @@ import { validateWith } from '@redwoodjs/api'
 
 import { db } from 'src/lib/db'
 
-export const transactions: QueryResolvers['transactions'] = () => {
-  return db.transaction.findMany()
-}
-
-export const transaction: QueryResolvers['transaction'] = ({ id }) => {
+export const transaction: QueryResolvers['transaction'] = ({ id, userId }) => {
   return db.transaction.findUnique({
-    where: { id },
+    where: { id, account: { userId } },
   })
 }
 
 export const accountTransactions: QueryResolvers['accountTransactions'] = ({
   accountId,
+  userId,
 }) => {
   return db.transaction.findMany({
-    where: { accountId },
+    where: { account: { id: accountId, userId } },
     include: { account: true },
     orderBy: { date: 'desc' },
   })
 }
 
 export const createTransaction: MutationResolvers['createTransaction'] =
-  async ({ input }) => {
+  async ({ input, userId }) => {
     const accountId = input.accountId
 
     await validateWith(async () => {
-      const ac = await db.account.findUnique({ where: { id: accountId } })
+      const ac = await db.account.findUnique({
+        where: { id: accountId, userId },
+      })
       if (ac.status !== 'active') {
         throw 'Account is inactivate. Please activate it first.'
       }
@@ -44,12 +43,12 @@ export const createTransaction: MutationResolvers['createTransaction'] =
     })
 
     const sum = await db.transaction.aggregate({
-      where: { accountId },
+      where: { accountId, account: { userId } },
       _sum: { amount: true },
     })
 
     await db.account.update({
-      where: { id: accountId },
+      where: { id: accountId, userId },
       data: { balance: sum._sum.amount },
     })
 
@@ -57,10 +56,15 @@ export const createTransaction: MutationResolvers['createTransaction'] =
   }
 
 export const updateTransaction: MutationResolvers['updateTransaction'] =
-  async ({ id, input }) => {
+  async ({ id, input, userId }) => {
     await validateWith(async () => {
       const ac = await db.transaction.findUnique({
-        where: { id },
+        where: {
+          id,
+          account: {
+            userId,
+          },
+        },
         include: {
           account: true,
         },
@@ -73,18 +77,23 @@ export const updateTransaction: MutationResolvers['updateTransaction'] =
 
     const transaction = await db.transaction.update({
       data: input,
-      where: { id },
+      where: { id, account: { userId } },
     })
 
     const accountId = transaction.accountId
 
     const sum = await db.transaction.aggregate({
-      where: { accountId },
+      where: {
+        accountId,
+        account: {
+          userId,
+        },
+      },
       _sum: { amount: true },
     })
 
     await db.account.update({
-      where: { id: accountId },
+      where: { id: accountId, userId },
       data: { balance: sum._sum.amount },
     })
 
@@ -92,10 +101,10 @@ export const updateTransaction: MutationResolvers['updateTransaction'] =
   }
 
 export const deleteTransaction: MutationResolvers['deleteTransaction'] =
-  async ({ id }) => {
+  async ({ id, userId }) => {
     await validateWith(async () => {
       const ac = await db.transaction.findUnique({
-        where: { id },
+        where: { id, account: { userId } },
         include: {
           account: true,
         },
@@ -106,18 +115,18 @@ export const deleteTransaction: MutationResolvers['deleteTransaction'] =
       }
     })
     const txn = await db.transaction.delete({
-      where: { id },
+      where: { id, account: { userId } },
     })
 
     const accountId = txn.accountId
 
     const sum = await db.transaction.aggregate({
-      where: { accountId },
+      where: { accountId, account: { userId } },
       _sum: { amount: true },
     })
 
     await db.account.update({
-      where: { id: accountId },
+      where: { id: accountId, userId },
       data: { balance: sum._sum.amount ? sum._sum.amount : 0 },
     })
 

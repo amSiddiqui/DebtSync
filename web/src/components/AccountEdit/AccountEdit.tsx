@@ -25,22 +25,27 @@ import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 
+import { useAuth } from 'src/auth'
 import { QUERY as AccountsQuery } from 'src/components/AccountNameCell/AccountNameCell'
 interface AccountEditProps {
   account: Account
 }
 
 const UPDATE_ACCOUNT_MUTATION = gql`
-  mutation UpdateAccountMutation($input: UpdateAccountInput!, $id: Int!) {
-    updateAccount(input: $input, id: $id) {
+  mutation UpdateAccountMutation(
+    $input: UpdateAccountInput!
+    $id: Int!
+    $userId: String!
+  ) {
+    updateAccount(input: $input, id: $id, userId: $userId) {
       id
     }
   }
 `
 
 const DELETE_ACCOUNT_MUTATION = gql`
-  mutation DeleteAccountMutation($id: Int!) {
-    deleteAccount(id: $id) {
+  mutation DeleteAccountMutation($id: Int!, $userId: String!) {
+    deleteAccount(id: $id, userId: $userId) {
       id
     }
   }
@@ -53,6 +58,7 @@ interface FormValues {
 const AccountEdit = ({ account }: AccountEditProps) => {
   const [opened, { open, close }] = useDisclosure(false)
   const [toggleActive, setToggleActive] = React.useState(false)
+  const { userMetadata } = useAuth()
 
   const [update, { loading, error }] = useMutation<
     UpdateAccountMutation,
@@ -70,7 +76,12 @@ const AccountEdit = ({ account }: AccountEditProps) => {
       }
       close()
     },
-    refetchQueries: [{ query: AccountsQuery, variables: { id: account.id } }],
+    refetchQueries: [
+      {
+        query: AccountsQuery,
+        variables: { id: account.id, userId: userMetadata.sub },
+      },
+    ],
   })
 
   const [deleteAccount, { loading: loadingDelete, error: errorDelete }] =
@@ -83,7 +94,10 @@ const AccountEdit = ({ account }: AccountEditProps) => {
           navigate(routes.home())
         },
         refetchQueries: [
-          { query: AccountsQuery, variables: { id: account.id } },
+          {
+            query: AccountsQuery,
+            variables: { id: account.id, userId: userMetadata.sub },
+          },
         ],
       }
     )
@@ -98,6 +112,7 @@ const AccountEdit = ({ account }: AccountEditProps) => {
     update({
       variables: {
         id: account.id,
+        userId: userMetadata.sub,
         input: toggleActive
           ? { status: account.status === 'active' ? 'inactive' : 'active' }
           : {
@@ -227,6 +242,7 @@ const AccountEdit = ({ account }: AccountEditProps) => {
                         deleteAccount({
                           variables: {
                             id: account.id,
+                            userId: userMetadata.sub,
                           },
                         })
                       }}
