@@ -90,13 +90,38 @@ export const updateTransaction: MutationResolvers['updateTransaction'] =
     return transaction
   }
 
-export const deleteTransaction: MutationResolvers['deleteTransaction'] = ({
-  id,
-}) => {
-  return db.transaction.delete({
-    where: { id },
-  })
-}
+export const deleteTransaction: MutationResolvers['deleteTransaction'] =
+  async ({ id }) => {
+    await validateWith(async () => {
+      const ac = await db.transaction.findUnique({
+        where: { id },
+        include: {
+          account: true,
+        },
+      })
+
+      if (ac.account.status !== 'active') {
+        throw 'Account is inactivate. Please activate it first.'
+      }
+    })
+    const txn = await db.transaction.delete({
+      where: { id },
+    })
+
+    const accountId = txn.accountId
+
+    const sum = await db.transaction.aggregate({
+      where: { accountId },
+      _sum: { amount: true },
+    })
+
+    await db.account.update({
+      where: { id: accountId },
+      data: { balance: sum._sum.amount ? sum._sum.amount : 0 },
+    })
+
+    return txn
+  }
 
 export const Transaction: TransactionRelationResolvers = {
   account: (_obj, { root }) => {

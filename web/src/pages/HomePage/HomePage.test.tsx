@@ -1,12 +1,20 @@
 import { render } from '@redwoodjs/testing/web'
 
+import { useAuth } from 'src/auth'
+
 import HomePage from './HomePage'
 
-//   Improve this test with help from the Redwood Testing Doc:
-//   https://redwoodjs.com/docs/testing#testing-pages-layouts
+jest.mock('src/auth', () => {
+  return {
+    useAuth: jest.fn(),
+  }
+})
 
 describe('HomePage', () => {
   it('renders successfully', () => {
+    const userMetadata = { sub: 'SUB_VALUE' }
+    useAuth.mockReturnValue({ userMetadata })
+
     expect(() => {
       render(<HomePage />)
     }).not.toThrow()
