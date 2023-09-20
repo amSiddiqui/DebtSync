@@ -8,7 +8,7 @@ import {
 
 import { useForm } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
-import { Toaster, toast } from '@redwoodjs/web/dist/toast'
+import { toast } from '@redwoodjs/web/dist/toast'
 
 import { QUERY as AccountQuery } from '../AccountNameCell'
 import TransactionModal from '../TransactionModal/TransactionModal'
@@ -71,7 +71,6 @@ const AddTransaction = ({ accountId }: AddTransactionProps) => {
   }
   return (
     <>
-      <Toaster />
       <TransactionModal
         opened={opened}
         onSubmit={onSubmit}

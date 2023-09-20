@@ -40,10 +40,18 @@ export const updateAccount: MutationResolvers['updateAccount'] = ({
   })
 }
 
-export const deleteAccount: MutationResolvers['deleteAccount'] = ({ id }) => {
-  return db.account.delete({
+export const deleteAccount: MutationResolvers['deleteAccount'] = async ({
+  id,
+}) => {
+  await db.transaction.deleteMany({
+    where: { accountId: id },
+  })
+
+  const account = await db.account.delete({
     where: { id },
   })
+
+  return account
 }
 
 export const Account: AccountRelationResolvers = {

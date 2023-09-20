@@ -16,7 +16,7 @@ import {
 
 import { Form, Controller, SubmitHandler, useForm } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
-import { Toaster, toast } from '@redwoodjs/web/dist/toast'
+import { toast } from '@redwoodjs/web/dist/toast'
 
 import { useAuth } from 'src/auth'
 import { QUERY as AccountsQuery } from 'src/components/AccountsCell/AccountsCell'
@@ -77,7 +77,6 @@ const AddAccount = () => {
   }
   return (
     <>
-      <Toaster />
       <Modal opened={opened} onClose={close} title="Add Debt Account">
         <Form
           formMethods={formMethods}
