@@ -13,9 +13,9 @@ export const schema = gql`
   }
 
   type Query {
-    transactions: [Transaction!]! @requireAuth
-    transaction(id: Int!): Transaction @requireAuth
-    accountTransactions(accountId: Int!): [Transaction!]! @requireAuth
+    transaction(id: Int!, userId: String!): Transaction @requireAuth
+    accountTransactions(accountId: Int!, userId: String): [Transaction!]!
+      @requireAuth
   }
 
   input CreateTransactionInput {
@@ -37,9 +37,15 @@ export const schema = gql`
   }
 
   type Mutation {
-    createTransaction(input: CreateTransactionInput!): Transaction! @requireAuth
-    updateTransaction(id: Int!, input: UpdateTransactionInput!): Transaction!
-      @requireAuth
-    deleteTransaction(id: Int!): Transaction! @requireAuth
+    createTransaction(
+      input: CreateTransactionInput!
+      userId: String!
+    ): Transaction! @requireAuth
+    updateTransaction(
+      id: Int!
+      input: UpdateTransactionInput!
+      userId: String
+    ): Transaction! @requireAuth
+    deleteTransaction(id: Int!, userId: String): Transaction! @requireAuth
   }
 `

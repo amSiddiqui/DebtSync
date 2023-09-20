@@ -6,8 +6,8 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import AccountDetail from '../AccountDetail/AccountDetail'
 
 export const QUERY = gql`
-  query account($id: Int!) {
-    account: account(id: $id) {
+  query account($id: Int!, $userId: String!) {
+    account: account(id: $id, userId: $userId) {
       id
       name
       status

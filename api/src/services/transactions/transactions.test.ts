@@ -5,7 +5,6 @@ import { ServiceValidationError } from '@redwoodjs/api'
 import { account } from '../accounts/accounts'
 
 import {
-  transactions,
   transaction,
   createTransaction,
   updateTransaction,
@@ -20,16 +19,13 @@ import type { StandardScenario } from './transactions.scenarios'
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
 describe('transactions', () => {
-  scenario('returns all transactions', async (scenario: StandardScenario) => {
-    const result = await transactions()
-
-    expect(result.length).toEqual(Object.keys(scenario.transaction).length)
-  })
-
   scenario(
     'returns a single transaction',
     async (scenario: StandardScenario) => {
-      const result = await transaction({ id: scenario.transaction.one.id })
+      const result = await transaction({
+        id: scenario.transaction.one.id,
+        userId: 'String',
+      })
 
       expect(result).toEqual(scenario.transaction.one)
     }
@@ -46,10 +42,12 @@ describe('transactions', () => {
         date: now,
         accountId: scenario.transaction.two.accountId,
       },
+      userId: 'String2',
     })
 
     const affectedAccount = await account({
       id: scenario.transaction.two.accountId,
+      userId: 'String2',
     })
 
     expect(result.amount).toEqual(4)
@@ -77,6 +75,7 @@ describe('transactions', () => {
             date: now,
             accountId: scenario.transaction.three.accountId,
           },
+          userId: 'String3',
         })
       } catch (e) {
         errorThrown = true
@@ -92,6 +91,7 @@ describe('transactions', () => {
   scenario('updates a transaction', async (scenario: StandardScenario) => {
     const original = (await transaction({
       id: scenario.transaction.one.id,
+      userId: 'String',
     })) as Transaction
     const result = await updateTransaction({
       id: original.id,
@@ -100,6 +100,7 @@ describe('transactions', () => {
 
     const affectedAccount = await account({
       id: scenario.transaction.one.accountId,
+      userId: 'String',
     })
 
     expect(result.amount).toEqual(7)
@@ -109,8 +110,9 @@ describe('transactions', () => {
   scenario('deletes a transaction', async (scenario: StandardScenario) => {
     const original = (await deleteTransaction({
       id: scenario.transaction.one.id,
+      userId: 'String',
     })) as Transaction
-    const result = await transaction({ id: original.id })
+    const result = await transaction({ id: original.id, userId: 'String' })
 
     expect(result).toEqual(null)
   })

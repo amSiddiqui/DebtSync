@@ -1,7 +1,6 @@
 import type { Account } from '@prisma/client'
 
 import {
-  accounts,
   account,
   createAccount,
   updateAccount,
@@ -16,14 +15,11 @@ import type { StandardScenario } from './accounts.scenarios'
 // https://redwoodjs.com/docs/testing#jest-expect-type-considerations
 
 describe('accounts', () => {
-  scenario('returns all accounts', async (scenario: StandardScenario) => {
-    const result = await accounts()
-
-    expect(result.length).toEqual(Object.keys(scenario.account).length)
-  })
-
   scenario('returns a single account', async (scenario: StandardScenario) => {
-    const result = await account({ id: scenario.account.one.id })
+    const result = await account({
+      id: scenario.account.one.id,
+      userId: scenario.account.one.userId,
+    })
 
     expect(result).toEqual(scenario.account.one)
   })
@@ -45,7 +41,10 @@ describe('accounts', () => {
   })
 
   scenario('updates a account', async (scenario: StandardScenario) => {
-    const original = (await account({ id: scenario.account.one.id })) as Account
+    const original = (await account({
+      id: scenario.account.one.id,
+      userId: scenario.account.one.userId,
+    })) as Account
     const result = await updateAccount({
       id: original.id,
       input: { status: 'String2' },
@@ -58,7 +57,7 @@ describe('accounts', () => {
     const original = (await deleteAccount({
       id: scenario.account.one.id,
     })) as Account
-    const result = await account({ id: original.id })
+    const result = await account({ id: original.id, userId: original.userId })
 
     expect(result).toEqual(null)
   })

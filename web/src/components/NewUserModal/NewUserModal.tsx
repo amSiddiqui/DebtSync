@@ -39,9 +39,7 @@ const NewUserModal = () => {
     onCompleted: () => {
       setShowModal(false)
     },
-    refetchQueries: [
-      { query: UserQuery, variables: { id: userMetadata?.sub } },
-    ],
+    refetchQueries: [{ query: UserQuery, variables: { id: userMetadata.sub } }],
   })
 
   const theme = useMantineTheme()

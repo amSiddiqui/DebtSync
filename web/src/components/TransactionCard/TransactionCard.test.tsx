@@ -13,6 +13,9 @@ describe('TransactionCard', () => {
       debit: true,
       amount: -50,
       date: '2022-01-01T00:00:00.000Z',
+      account: {
+        status: 'active',
+      },
     } as TransactionResult
 
     expect(() => {

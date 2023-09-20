@@ -6,19 +6,15 @@ import type {
 
 import { db } from 'src/lib/db'
 
-export const accounts: QueryResolvers['accounts'] = () => {
-  return db.account.findMany()
-}
-
 export const userAccounts: QueryResolvers['userAccounts'] = ({ userId }) => {
   return db.account.findMany({
     where: { userId },
   })
 }
 
-export const account: QueryResolvers['account'] = ({ id }) => {
+export const account: QueryResolvers['account'] = ({ id, userId }) => {
   return db.account.findUnique({
-    where: { id },
+    where: { id, userId },
   })
 }
 
@@ -33,22 +29,29 @@ export const createAccount: MutationResolvers['createAccount'] = ({
 export const updateAccount: MutationResolvers['updateAccount'] = ({
   id,
   input,
+  userId,
 }) => {
   return db.account.update({
     data: input,
-    where: { id },
+    where: { id, userId },
   })
 }
 
 export const deleteAccount: MutationResolvers['deleteAccount'] = async ({
   id,
+  userId,
 }) => {
   await db.transaction.deleteMany({
-    where: { accountId: id },
+    where: {
+      accountId: id,
+      account: {
+        userId,
+      },
+    },
   })
 
   const account = await db.account.delete({
-    where: { id },
+    where: { id, userId },
   })
 
   return account
