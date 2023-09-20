@@ -13,6 +13,9 @@ export type TransactionResult = {
   date: string
   description: string
   accountId: number
+  account: {
+    status: string
+  }
 }
 
 export const QUERY = gql`
@@ -25,6 +28,9 @@ export const QUERY = gql`
       date
       description
       accountId
+      account {
+        status
+      }
     }
   }
 `

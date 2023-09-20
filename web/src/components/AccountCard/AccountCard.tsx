@@ -20,6 +20,13 @@ interface AccountCardProps {
 const AccountCard = ({ account }: AccountCardProps) => {
   const theme = useMantineTheme()
 
+  const color =
+    account.status === 'active'
+      ? account.balance < 0
+        ? theme.colors.red[8]
+        : theme.colors.green[8]
+      : theme.colors.gray[6]
+
   return (
     <Link
       style={{
@@ -45,7 +52,12 @@ const AccountCard = ({ account }: AccountCardProps) => {
             <Title order={4} weight={500}>
               {account.name}
             </Title>
-            <Badge variant="light">{account.status}</Badge>
+            <Badge
+              variant="light"
+              color={account.status === 'active' ? 'blue' : 'red'}
+            >
+              {account.status}
+            </Badge>
           </Group>
           <Group
             sx={{
@@ -59,24 +71,12 @@ const AccountCard = ({ account }: AccountCardProps) => {
               }}
             >
               <CurrencyPound
-                color={
-                  account.balance < 0
-                    ? theme.colors.red[8]
-                    : theme.colors.green[8]
-                }
+                color={color}
                 style={{
                   marginBottom: '0.4rem',
                 }}
               />
-              <Title
-                order={1}
-                color={
-                  account.balance < 0
-                    ? theme.colors.red[8]
-                    : theme.colors.green[8]
-                }
-                weight={500}
-              >
+              <Title order={1} color={color} weight={500}>
                 {account.balance.toLocaleString('en-GB', {
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,

@@ -11,16 +11,19 @@ import {
 } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { motion } from 'framer-motion'
-import { DeviceFloppy, Pencil, Power } from 'tabler-icons-react'
+import { DeviceFloppy, Pencil, Power, Trash } from 'tabler-icons-react'
 import { Account } from 'types/graphql'
 import {
   UpdateAccountMutation,
   UpdateAccountMutationVariables,
+  DeleteAccountMutation,
+  DeleteAccountMutationVariables,
 } from 'types/graphql'
 
 import { Form, Controller, SubmitHandler, useForm } from '@redwoodjs/forms'
+import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
-import { Toaster, toast } from '@redwoodjs/web/dist/toast'
+import { toast } from '@redwoodjs/web/dist/toast'
 
 import { QUERY as AccountsQuery } from 'src/components/AccountNameCell/AccountNameCell'
 interface AccountEditProps {
@@ -35,21 +38,33 @@ const UPDATE_ACCOUNT_MUTATION = gql`
   }
 `
 
+const DELETE_ACCOUNT_MUTATION = gql`
+  mutation DeleteAccountMutation($id: Int!) {
+    deleteAccount(id: $id) {
+      id
+    }
+  }
+`
+
 interface FormValues {
   name: string
 }
 
 const AccountEdit = ({ account }: AccountEditProps) => {
   const [opened, { open, close }] = useDisclosure(false)
-  const [deactivate, setDeactivate] = React.useState(false)
+  const [toggleActive, setToggleActive] = React.useState(false)
 
   const [update, { loading, error }] = useMutation<
     UpdateAccountMutation,
     UpdateAccountMutationVariables
   >(UPDATE_ACCOUNT_MUTATION, {
     onCompleted: () => {
-      if (deactivate) {
-        toast.success('Account Deactivated')
+      if (toggleActive) {
+        if (account.status === 'active') {
+          toast.success('Account Deactivated')
+        } else {
+          toast.success('Account Activated')
+        }
       } else {
         toast.success('Account Updated')
       }
@@ -57,6 +72,21 @@ const AccountEdit = ({ account }: AccountEditProps) => {
     },
     refetchQueries: [{ query: AccountsQuery, variables: { id: account.id } }],
   })
+
+  const [deleteAccount, { loading: loadingDelete, error: errorDelete }] =
+    useMutation<DeleteAccountMutation, DeleteAccountMutationVariables>(
+      DELETE_ACCOUNT_MUTATION,
+      {
+        onCompleted: () => {
+          toast.success('Account Deleted')
+          close()
+          navigate(routes.home())
+        },
+        refetchQueries: [
+          { query: AccountsQuery, variables: { id: account.id } },
+        ],
+      }
+    )
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
@@ -68,8 +98,8 @@ const AccountEdit = ({ account }: AccountEditProps) => {
     update({
       variables: {
         id: account.id,
-        input: deactivate
-          ? { status: 'inactive' }
+        input: toggleActive
+          ? { status: account.status === 'active' ? 'inactive' : 'active' }
           : {
               name: data.name,
             },
@@ -78,7 +108,6 @@ const AccountEdit = ({ account }: AccountEditProps) => {
   }
   return (
     <>
-      <Toaster />
       <Tooltip withArrow position="bottom" label="Edit Debt Account">
         <Box
           onClick={open}
@@ -118,6 +147,16 @@ const AccountEdit = ({ account }: AccountEditProps) => {
                 {error.message}
               </Text>
             )}
+            {errorDelete && (
+              <Text
+                sx={{
+                  color: 'red',
+                }}
+              >
+                {errorDelete.message}
+              </Text>
+            )}
+
             <Controller
               name="name"
               rules={{
@@ -158,14 +197,45 @@ const AccountEdit = ({ account }: AccountEditProps) => {
                 </Button>
               </Box>
               <Box>
-                <Button
-                  type="submit"
-                  color="red"
-                  onClick={() => setDeactivate(true)}
-                  leftIcon={<Power size="1rem" />}
-                >
-                  Deactivate
-                </Button>
+                {account.status === 'active' && (
+                  <Button
+                    type="submit"
+                    color="red"
+                    disabled={loading || loadingDelete}
+                    onClick={() => setToggleActive(true)}
+                    leftIcon={<Power size="1rem" />}
+                  >
+                    Deactivate
+                  </Button>
+                )}
+                {account.status !== 'active' && (
+                  <Group>
+                    <Button
+                      type="submit"
+                      color="green"
+                      disabled={loading || loadingDelete}
+                      onClick={() => setToggleActive(true)}
+                      leftIcon={<Power size="1rem" />}
+                    >
+                      Activate
+                    </Button>
+                    <Button
+                      leftIcon={<Trash size="1rem" />}
+                      color="red"
+                      disabled={loading || loadingDelete}
+                      onClick={() => {
+                        deleteAccount({
+                          variables: {
+                            id: account.id,
+                          },
+                        })
+                      }}
+                      type="button"
+                    >
+                      Delete
+                    </Button>
+                  </Group>
+                )}
               </Box>
             </Group>
           </Stack>

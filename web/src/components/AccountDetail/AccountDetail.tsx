@@ -22,6 +22,12 @@ interface AccountDetailProps {
 
 const AccountDetail = ({ account }: AccountDetailProps) => {
   const theme = useMantineTheme()
+  const color =
+    account.status == 'active'
+      ? account.balance < 0
+        ? 'red'
+        : 'green'
+      : 'grey'
   return (
     <Stack>
       <Grid>
@@ -39,7 +45,9 @@ const AccountDetail = ({ account }: AccountDetailProps) => {
             </Link>
 
             <Title>{account.name}</Title>
-            <Badge>{account.status}</Badge>
+            <Badge color={account.status === 'active' ? 'blue' : 'red'}>
+              {account.status}
+            </Badge>
           </Group>
         </Grid.Col>
         <Grid.Col span={2}>
@@ -55,9 +63,9 @@ const AccountDetail = ({ account }: AccountDetailProps) => {
               style={{
                 marginBottom: '0.4rem',
               }}
-              color={account.balance < 0 ? 'red' : 'green'}
+              color={color}
             />
-            <Title color={account.balance < 0 ? 'red' : 'green'}>
+            <Title color={color}>
               {account.balance.toLocaleString('en-GB', {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,

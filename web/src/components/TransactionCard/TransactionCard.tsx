@@ -56,6 +56,7 @@ interface TractionCardProps {
   transaction: TransactionResult
 }
 const TransactionCard = ({ transaction }: TractionCardProps) => {
+  const isActive = transaction.account.status === 'active'
   const theme = useMantineTheme()
   const xsQuery = useMediaQuery(`(max-width: ${theme.breakpoints.xs})`)
   const [openedDelete, { open: openDelete, close: closeDelete }] =
@@ -128,7 +129,9 @@ const TransactionCard = ({ transaction }: TractionCardProps) => {
         <Tooltip withArrow label={transaction.amount > 0 ? 'Lent' : 'Borrowed'}>
           <Avatar
             radius={'xl'}
-            color={transaction.amount > 0 ? 'green' : 'red'}
+            color={
+              isActive ? (transaction.amount > 0 ? 'green' : 'red') : 'gray'
+            }
           >
             {transaction.amount > 0 ? 'L' : 'B'}
           </Avatar>
@@ -147,27 +150,29 @@ const TransactionCard = ({ transaction }: TractionCardProps) => {
             <Text c="dimmed">
               {dayjs(transaction.date).format('DD-MMM-YYYY')}
             </Text>
-            <Menu shadow="md" width={200}>
-              <Menu.Target>
-                <ActionIcon>
-                  <DotsVertical size={'1rem'} />
-                </ActionIcon>
-              </Menu.Target>
+            {isActive && (
+              <Menu shadow="md" width={200}>
+                <Menu.Target>
+                  <ActionIcon>
+                    <DotsVertical size={'1rem'} />
+                  </ActionIcon>
+                </Menu.Target>
 
-              <Menu.Dropdown>
-                <Menu.Label>Edit Transaction</Menu.Label>
-                <Menu.Item onClick={openEdit} icon={<Pencil size={'1rem'} />}>
-                  Edit
-                </Menu.Item>
-                <Menu.Item
-                  onClick={openDelete}
-                  color="red"
-                  icon={<Trash size={'1rem'} />}
-                >
-                  Delete
-                </Menu.Item>
-              </Menu.Dropdown>
-            </Menu>
+                <Menu.Dropdown>
+                  <Menu.Label>Edit Transaction</Menu.Label>
+                  <Menu.Item onClick={openEdit} icon={<Pencil size={'1rem'} />}>
+                    Edit
+                  </Menu.Item>
+                  <Menu.Item
+                    onClick={openDelete}
+                    color="red"
+                    icon={<Trash size={'1rem'} />}
+                  >
+                    Delete
+                  </Menu.Item>
+                </Menu.Dropdown>
+              </Menu>
+            )}
           </Group>
 
           <Group
@@ -178,10 +183,12 @@ const TransactionCard = ({ transaction }: TractionCardProps) => {
           >
             <CurrencyPound
               color={
-                transaction.amount > 0
-                  ? 'green'
-                  : transaction.amount < 0
-                  ? 'red'
+                isActive
+                  ? transaction.amount > 0
+                    ? 'green'
+                    : transaction.amount < 0
+                    ? 'red'
+                    : 'gray'
                   : 'gray'
               }
               style={{
@@ -191,11 +198,13 @@ const TransactionCard = ({ transaction }: TractionCardProps) => {
             ></CurrencyPound>
             <Text
               color={
-                transaction.amount > 0
-                  ? 'green'
-                  : transaction.amount < 0
-                  ? 'red'
-                  : 'inherit'
+                isActive
+                  ? transaction.amount > 0
+                    ? 'green'
+                    : transaction.amount < 0
+                    ? 'red'
+                    : 'inherit'
+                  : theme.colors.gray[5]
               }
             >
               {transaction.amount.toLocaleString('en-GB', {
