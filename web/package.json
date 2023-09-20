@@ -14,10 +14,10 @@
     "@auth0/auth0-spa-js": "^2",
     "@fontsource/roboto": "^5.0.8",
     "@mantine/dates": "^6.0.20",
-    "@redwoodjs/auth-auth0-web": "6.2.1",
-    "@redwoodjs/forms": "6.2.1",
-    "@redwoodjs/router": "6.2.1",
-    "@redwoodjs/web": "6.2.1",
+    "@redwoodjs/auth-auth0-web": "6.2.3",
+    "@redwoodjs/forms": "6.2.3",
+    "@redwoodjs/router": "6.2.3",
+    "@redwoodjs/web": "6.2.3",
     "dayjs": "^1.11.9",
     "framer-motion": "^10.16.4",
     "lodash": "^4.17.21",
@@ -30,6 +30,6 @@
     "@emotion/react": "^11.11.1",
     "@mantine/core": "^6.0.19",
     "@mantine/hooks": "^6.0.19",
-    "@redwoodjs/vite": "6.2.1"
+    "@redwoodjs/vite": "6.2.3"
   }
 }

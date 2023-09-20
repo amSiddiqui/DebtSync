@@ -16,7 +16,7 @@ const AccountPage = ({ id }: AccountPageProps) => {
       <MetaTags title="Account" description="Account page" />
 
       <AccountNameCell id={id} />
-      <Space h="lg" />
+      <Space h="xl" />
       <Flex
         sx={{
           marginBottom: '1rem',
@@ -32,7 +32,6 @@ const AccountPage = ({ id }: AccountPageProps) => {
         </Title>
         <AddTransaction accountId={id} />
       </Flex>
-      <Space h="lg" />
 
       <TransactionsCell accountId={id} />
     </>
