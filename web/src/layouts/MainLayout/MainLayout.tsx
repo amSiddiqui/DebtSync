@@ -11,7 +11,7 @@ import {
   ActionIcon,
   useMantineColorScheme,
 } from '@mantine/core'
-import { Sun, MoonStars, Cash } from 'tabler-icons-react'
+import { Sun, MoonStars, Cash, InfoCircle } from 'tabler-icons-react'
 
 import { routes } from '@redwoodjs/router'
 import { Toaster } from '@redwoodjs/web/dist/toast'
@@ -59,6 +59,13 @@ const MainLayout = ({ children }: MainLayoutProps) => {
                 icon={<Cash size="1rem" />}
                 label="Debts"
                 to={routes.home()}
+              />
+              <NavbarLink
+                label="Support"
+                to={routes.support()}
+                icon={<InfoCircle size="1rem" />}
+                clickCallBack={() => setOpened(false)}
+                color="blue"
               />
             </Navbar.Section>
             <Navbar.Section>
