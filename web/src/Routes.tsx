@@ -15,6 +15,7 @@ import MainLayout from './layouts/MainLayout/MainLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Route path="/support" page={SupportPage} name="support" />
       <Route path="/login" page={LoginPage} name="login" />
       <Private unauthenticated="login">
         <Set wrap={MainLayout}>
